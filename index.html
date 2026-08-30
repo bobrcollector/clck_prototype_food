@@ -18,10 +18,11 @@
     --text:#1c1c1c;
     --border:#d8d8d8;
     --field-h:40px;
+    --danger:#d64545;
   }
   *{box-sizing:border-box;}
   /* Гарантируем, что атрибут hidden всегда скрывает элемент, даже если
-     класс задаёт своё display (flex и т.п.) — иначе toggle через .hidden не работает */
+     класс задаёт своё display (flex и т.п.) */
   [hidden]{display:none !important;}
   html,body{height:100%;}
   body{
@@ -72,7 +73,7 @@
   .icon-btn:hover{background:var(--gray-100);}
   .icon-btn svg{width:22px;height:22px;}
 
-  .main-content{flex:1;background:#fff;overflow-y:auto;}
+  .main-content{flex:1;background:#fff;overflow-y:auto;min-height:0;}
 
   /* Skeleton feed */
   .feed-skeleton{padding:14px;display:flex;flex-direction:column;gap:20px;}
@@ -88,11 +89,10 @@
   .skeleton-line{height:11px;}
   .skeleton-line.w-70{width:70%;}
   .skeleton-line.w-40{width:40%;}
-  .skeleton-line.w-30{width:30%;}
   @keyframes shimmer{0%{background-position:100% 0;}100%{background-position:-100% 0;}}
   @media (prefers-reduced-motion: reduce){ .skeleton-block{animation:none;} }
 
-  /* Bottom nav */
+  /* Bottom nav — всегда зафиксирована внизу экрана (flex:0 0 auto в колонке) */
   .bottom-nav{flex:0 0 auto; display:flex; border-top:1px solid var(--border); background:#fff;}
   .nav-item{
     flex:1; display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -126,7 +126,7 @@
   .progress-segment{flex:1;height:4px;border-radius:2px;background:var(--gray-200);}
   .progress-segment.filled{background:var(--gray-700);}
   .progress-label{font-size:11px;color:var(--gray-500);}
-  .modal-content{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:20px;}
+  .modal-content{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:20px;min-height:0;}
   .modal-footer{flex:0 0 auto;padding:12px 16px 18px;border-top:1px solid var(--border);}
   .step-heading{margin:0;font-size:16.5px;font-weight:700;}
   .field-hint{margin:-10px 0 0;font-size:12px;color:var(--gray-500);line-height:1.5;}
@@ -160,6 +160,14 @@
   .stepper button{width:var(--field-h);height:var(--field-h);border-radius:8px;border:1px solid var(--border);background:var(--gray-50);font-size:16px;line-height:1;cursor:pointer;color:var(--text);flex:0 0 auto;}
   .stepper button:hover{background:var(--gray-200);}
   .stepper input{width:48px;height:var(--field-h);text-align:center;padding:0 4px;}
+
+  /* Валидация */
+  .input-error{border-color:var(--danger) !important;}
+  .section-invalid{outline:1.5px dashed var(--danger);outline-offset:6px;border-radius:10px;}
+  .field-error-msg{color:var(--danger);font-size:12px;margin-top:2px;}
+
+  /* Пустые состояния списков */
+  .empty-state{padding:20px 12px;text-align:center;color:var(--gray-500);font-size:13px;border:1px dashed var(--border);border-radius:10px;}
 
   /* Chip group (время) + свой вариант */
   .chip-group{display:flex;flex-wrap:wrap;gap:8px;}
@@ -214,8 +222,8 @@
   .photo-action-btn svg{width:14px;height:14px;}
 
   /* Шаги приготовления */
-  .step-block{border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px;touch-action:pan-y;}
-  .step-block.dragging{opacity:.85;box-shadow:0 8px 20px rgba(0,0,0,.18);background:#fff;}
+  .step-block{border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px;touch-action:pan-y;background:#fff;}
+  .step-block.dragging{opacity:.9;box-shadow:0 10px 24px rgba(0,0,0,.2);}
   .step-block-header{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--gray-800);}
   .step-block-header .step-title{flex:1;}
   .drag-handle{color:var(--gray-400);display:flex;flex:0 0 auto;cursor:grab;touch-action:none;}
@@ -224,7 +232,7 @@
 
   /* Ингредиенты */
   .ingredient-row{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--border);border-radius:10px;background:#fff;touch-action:pan-y;}
-  .ingredient-row.dragging{opacity:.85;box-shadow:0 8px 20px rgba(0,0,0,.18);}
+  .ingredient-row.dragging{opacity:.9;box-shadow:0 10px 24px rgba(0,0,0,.2);}
   .ingredient-row .ingredient-name{flex:1;font-size:14px;}
   .ingredient-row .ingredient-qty{font-size:13px;color:var(--gray-600);white-space:nowrap;}
 
@@ -276,9 +284,13 @@
   .success-actions{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:14px;}
 
   @media (max-width:480px){
+    html, body{ height:100%; overflow:hidden; }
     .stage{padding:0;gap:0;}
     .stage-caption{display:none;}
-    .device{width:100vw;height:100vh;max-height:none;border-radius:0;box-shadow:none;}
+    .device{
+      width:100vw; height:100vh; height:100dvh;
+      max-height:none; border-radius:0; box-shadow:none;
+    }
   }
 </style>
 </head>
@@ -301,7 +313,7 @@
             <div class="skeleton-block skeleton-img"></div>
             <div class="skeleton-row">
               <div class="skeleton-block skeleton-avatar"></div>
-              <div class="skeleton-block skeleton-line w-30" style="flex:0 0 auto;width:90px;"></div>
+              <div class="skeleton-block skeleton-line" style="flex:0 0 auto;width:90px;"></div>
             </div>
             <div class="skeleton-block skeleton-line w-70"></div>
             <div class="skeleton-block skeleton-line w-40"></div>
@@ -310,7 +322,7 @@
             <div class="skeleton-block skeleton-img"></div>
             <div class="skeleton-row">
               <div class="skeleton-block skeleton-avatar"></div>
-              <div class="skeleton-block skeleton-line w-30" style="flex:0 0 auto;width:90px;"></div>
+              <div class="skeleton-block skeleton-line" style="flex:0 0 auto;width:90px;"></div>
             </div>
             <div class="skeleton-block skeleton-line w-70"></div>
             <div class="skeleton-block skeleton-line w-40"></div>
@@ -319,7 +331,7 @@
             <div class="skeleton-block skeleton-img"></div>
             <div class="skeleton-row">
               <div class="skeleton-block skeleton-avatar"></div>
-              <div class="skeleton-block skeleton-line w-30" style="flex:0 0 auto;width:90px;"></div>
+              <div class="skeleton-block skeleton-line" style="flex:0 0 auto;width:90px;"></div>
             </div>
             <div class="skeleton-block skeleton-line w-70"></div>
             <div class="skeleton-block skeleton-line w-40"></div>
@@ -411,12 +423,12 @@
 
         <div class="field">
           <label>Название блюда*</label>
-          <input type="text" placeholder="Название блюда">
+          <input type="text" id="dish-name-input" placeholder="Название блюда">
         </div>
 
         <div class="field">
           <label>Описание блюда*</label>
-          <textarea placeholder="Описание блюда"></textarea>
+          <textarea id="dish-desc-textarea" placeholder="Описание блюда"></textarea>
         </div>
 
         <div class="field">
@@ -427,7 +439,7 @@
         <div class="field">
           <label>Калорийность</label>
           <div class="suffix-row">
-            <input type="number" placeholder="Калорийность" min="0">
+            <input type="number" id="calorie-input" placeholder="Калорийность" min="0">
             <span class="suffix">ккал</span>
           </div>
         </div>
@@ -436,7 +448,7 @@
           <label>Количество порций</label>
           <div class="stepper">
             <button type="button" class="dec" aria-label="Уменьшить">−</button>
-            <input type="text" value="1" inputmode="numeric">
+            <input type="text" id="servings-input" value="1" inputmode="numeric">
             <button type="button" class="inc" aria-label="Увеличить">+</button>
             <span class="suffix">порций</span>
           </div>
@@ -446,7 +458,7 @@
           <label>Общее время на кухне</label>
           <div class="chip-group">
             <button type="button" class="chip-btn">15 мин</button>
-            <button type="button" class="chip-btn selected">30 мин</button>
+            <button type="button" class="chip-btn">30 мин</button>
             <button type="button" class="chip-btn">1 час</button>
             <button type="button" class="chip-btn">1,5 часа</button>
             <button type="button" class="chip-btn">Свой вариант</button>
@@ -463,7 +475,7 @@
         <div class="field">
           <label>Активное время на кухне</label>
           <div class="chip-group">
-            <button type="button" class="chip-btn selected">15 мин</button>
+            <button type="button" class="chip-btn">15 мин</button>
             <button type="button" class="chip-btn">30 мин</button>
             <button type="button" class="chip-btn">1 час</button>
             <button type="button" class="chip-btn">1,5 часа</button>
@@ -480,7 +492,7 @@
 
       </div>
       <div class="modal-footer">
-        <button class="btn-primary" type="button" data-action="next" data-target="screen-step2">Дальше</button>
+        <button class="btn-primary" type="button" id="step1-next-btn">Дальше</button>
       </div>
     </div>
 
@@ -517,59 +529,19 @@
         <div class="field" id="mode-steps">
           <label>Шаги приготовления</label>
           <div id="steps-container" style="display:flex;flex-direction:column;gap:12px;">
-
-            <div class="step-block">
-              <div class="step-block-header">
-                <span class="drag-handle" aria-label="Перетащить шаг">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-                </span>
-                <span class="step-title">Шаг 1</span>
-                <button class="icon-btn step-remove" type="button" aria-label="Удалить шаг">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
-                </button>
-              </div>
-              <textarea placeholder="Описание шага"></textarea>
-              <div class="photo-box has-image">
-                <div class="photo-box-actions">
-                  <button type="button" class="photo-action-btn photo-action-change" aria-label="Заменить фото">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20l4.3-.9L19 8.4a1.5 1.5 0 0 0 0-2.1l-1.3-1.3a1.5 1.5 0 0 0-2.1 0L5 15.7 4 20Z"/></svg>
-                  </button>
-                  <button type="button" class="photo-action-btn photo-action-remove" aria-label="Удалить фото">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2m-9 0 1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="step-block">
-              <div class="step-block-header">
-                <span class="drag-handle" aria-label="Перетащить шаг">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-                </span>
-                <span class="step-title">Шаг 2</span>
-                <button class="icon-btn step-remove" type="button" aria-label="Удалить шаг">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
-                </button>
-              </div>
-              <textarea placeholder="Описание шага"></textarea>
-              <button class="photo-dropzone" type="button">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-2h6l2 2h3v11H4V8Z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
-                <span>Добавить фото</span>
-              </button>
-            </div>
-
+            <div class="empty-state" id="steps-empty">Вы не добавили ни одного шага</div>
             <button class="btn-secondary" type="button" id="add-step-btn">+ Добавить шаг</button>
           </div>
         </div>
 
         <div class="field" id="mode-text" hidden>
           <label>Текстовое описание</label>
-          <textarea placeholder="Опишите процесс приготовления от начала до конца"></textarea>
+          <textarea id="text-description-textarea" placeholder="Опишите процесс приготовления от начала до конца"></textarea>
         </div>
 
       </div>
       <div class="modal-footer">
-        <button class="btn-primary" type="button" data-action="next" data-target="screen-step3">Дальше</button>
+        <button class="btn-primary" type="button" id="step2-next-btn">Дальше</button>
       </div>
     </div>
 
@@ -598,30 +570,7 @@
         <h3 class="step-heading">Состав и ингредиенты</h3>
 
         <div id="ingredient-list" style="display:flex;flex-direction:column;gap:10px;">
-          <div class="ingredient-row">
-            <span class="drag-handle" aria-label="Перетащить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
-            <span class="ingredient-name">Ингредиент</span>
-            <span class="ingredient-qty">4 шт.</span>
-            <button class="icon-btn ingredient-remove" type="button" aria-label="Удалить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-          </div>
-          <div class="ingredient-row">
-            <span class="drag-handle" aria-label="Перетащить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
-            <span class="ingredient-name">Ингредиент</span>
-            <span class="ingredient-qty">4 шт.</span>
-            <button class="icon-btn ingredient-remove" type="button" aria-label="Удалить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-          </div>
-          <div class="ingredient-row">
-            <span class="drag-handle" aria-label="Перетащить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
-            <span class="ingredient-name">Ингредиент</span>
-            <span class="ingredient-qty">4 шт.</span>
-            <button class="icon-btn ingredient-remove" type="button" aria-label="Удалить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-          </div>
-          <div class="ingredient-row">
-            <span class="drag-handle" aria-label="Перетащить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
-            <span class="ingredient-name">Ингредиент</span>
-            <span class="ingredient-qty">4 шт.</span>
-            <button class="icon-btn ingredient-remove" type="button" aria-label="Удалить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-          </div>
+          <div class="empty-state" id="ingredients-empty">Вы не добавили ни одного ингредиента</div>
         </div>
 
         <div class="field">
@@ -660,7 +609,7 @@
 
       </div>
       <div class="modal-footer">
-        <button class="btn-primary" type="button" data-action="next" data-target="screen-step4">Дальше</button>
+        <button class="btn-primary" type="button" id="step3-next-btn">Дальше</button>
       </div>
     </div>
 
@@ -682,7 +631,7 @@
           <div class="progress-segment filled"></div>
           <div class="progress-segment filled"></div>
         </div>
-        <div class="progress-label">Шаг 4 из 4</div>
+        <div class="progress-label">Шаг 4 из 4 · необязательно</div>
       </div>
       <div class="modal-content">
 
@@ -691,7 +640,7 @@
         <div class="field">
           <label>Тип приготовления</label>
           <div class="select-wrap">
-            <select>
+            <select id="cooking-method-select">
               <option value="" selected>Выберите тип приготовления</option>
               <option>Варка</option>
               <option>Жарка</option>
@@ -796,12 +745,37 @@
   var ICON_PENCIL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20l4.3-.9L19 8.4a1.5 1.5 0 0 0 0-2.1l-1.3-1.3a1.5 1.5 0 0 0-2.1 0L5 15.7 4 20Z"/></svg>';
   var ICON_CAMERA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-2h6l2 2h3v11H4V8Z"/><circle cx="12" cy="13.5" r="3.2"/></svg>';
 
+  /* ===================== Валидация: общие помощники ===================== */
+  function setInvalid(el, message, invalidClass){
+    el.classList.add(invalidClass);
+    var msg = el.nextElementSibling;
+    if(!msg || !msg.classList.contains('field-error-msg')){
+      msg = document.createElement('div');
+      msg.className = 'field-error-msg';
+      el.insertAdjacentElement('afterend', msg);
+    }
+    msg.textContent = message;
+  }
+  function clearInvalid(el, invalidClass){
+    if(!el) return;
+    el.classList.remove(invalidClass);
+    var msg = el.nextElementSibling;
+    if(msg && msg.classList.contains('field-error-msg')) msg.remove();
+  }
+  function focusInvalid(el){
+    if(!el) return;
+    el.scrollIntoView({ behavior:'smooth', block:'center' });
+    if(typeof el.focus === 'function') el.focus({ preventScroll:true });
+  }
+
   /* ===================== Навигация между экранами ===================== */
   function showScreen(id){
     document.querySelectorAll('.modal-screen').forEach(function(s){ s.classList.remove('active'); });
     if(id && id !== 'screen-main'){
       var target = document.getElementById(id);
       if(target) target.classList.add('active');
+    } else {
+      resetRecipeForm();
     }
   }
 
@@ -814,9 +788,6 @@
         showScreen(target);
       }
     });
-  });
-  document.querySelectorAll('[data-action="next"]').forEach(function(btn){
-    btn.addEventListener('click', function(){ showScreen(btn.dataset.target); });
   });
   document.querySelectorAll('[data-action="finish"]').forEach(function(btn){
     btn.addEventListener('click', function(){ showScreen('screen-main'); });
@@ -879,16 +850,21 @@
     var customRow = group.parentElement.querySelector('.custom-time-row');
     group.querySelectorAll('.chip-btn').forEach(function(btn){
       btn.addEventListener('click', function(){
+        var wasSelected = btn.classList.contains('selected');
         group.querySelectorAll('.chip-btn').forEach(function(b){ b.classList.remove('selected'); });
-        btn.classList.add('selected');
-        if(customRow){
-          if(btn.textContent.trim() === 'Свой вариант'){
-            customRow.hidden = false;
-            var inp = customRow.querySelector('input');
-            if(inp) inp.focus();
-          } else {
-            customRow.hidden = true;
+        if(!wasSelected){
+          btn.classList.add('selected');
+          if(customRow){
+            if(btn.textContent.trim() === 'Свой вариант'){
+              customRow.hidden = false;
+              var inp = customRow.querySelector('input');
+              if(inp) inp.focus();
+            } else {
+              customRow.hidden = true;
+            }
           }
+        } else if(customRow){
+          customRow.hidden = true;
         }
       });
     });
@@ -969,15 +945,23 @@
     return div;
   }
 
-  /* ===================== Добавление / нумерация шагов ===================== */
-  function renumberSteps(){
-    document.querySelectorAll('#steps-container .step-block .step-title').forEach(function(el, i){
-      el.textContent = 'Шаг ' + (i + 1);
-    });
-  }
-  renumberSteps();
+  /* ===================== Шаги приготовления: добавление / нумерация / пустое состояние ===================== */
+  var stepsContainer = document.getElementById('steps-container');
+  var stepsEmptyState = document.getElementById('steps-empty');
+  var addStepBtn = document.getElementById('add-step-btn');
 
-  document.getElementById('add-step-btn').addEventListener('click', function(){
+  function refreshSteps(){
+    var blocks = stepsContainer.querySelectorAll('.step-block');
+    blocks.forEach(function(el, i){
+      var titleEl = el.querySelector('.step-title');
+      if(titleEl) titleEl.textContent = 'Шаг ' + (i + 1);
+    });
+    stepsEmptyState.hidden = blocks.length > 0;
+    if(blocks.length > 0) clearInvalid(stepsContainer, 'section-invalid');
+  }
+  refreshSteps();
+
+  function createStepBlock(){
     var block = document.createElement('div');
     block.className = 'step-block';
     block.innerHTML =
@@ -987,18 +971,47 @@
         '<button class="icon-btn step-remove" type="button" aria-label="Удалить шаг">' + ICON_CLOSE + '</button>' +
       '</div>' +
       '<textarea placeholder="Описание шага"></textarea>';
-    var dz = createPhotoDropzoneEl();
-    block.appendChild(dz);
-    document.getElementById('steps-container').insertBefore(block, document.getElementById('add-step-btn'));
-    renumberSteps();
+    block.appendChild(createPhotoDropzoneEl());
+    return block;
+  }
+  addStepBtn.addEventListener('click', function(){
+    stepsContainer.insertBefore(createStepBlock(), addStepBtn);
+    refreshSteps();
+  });
+  stepsContainer.addEventListener('input', function(e){
+    if(e.target.tagName === 'TEXTAREA' && e.target.value.trim()){
+      clearInvalid(stepsContainer, 'section-invalid');
+    }
   });
 
-  /* ===================== Добавление ингредиента ===================== */
+  /* ===================== Ингредиенты: добавление / пустое состояние ===================== */
+  var ingredientList = document.getElementById('ingredient-list');
+  var ingredientsEmptyState = document.getElementById('ingredients-empty');
+  var ingredientNameInput = document.getElementById('ingredient-name');
+
+  function updateIngredientsEmptyState(){
+    var count = ingredientList.querySelectorAll('.ingredient-row').length;
+    ingredientsEmptyState.hidden = count > 0;
+    if(count > 0) clearInvalid(ingredientList, 'section-invalid');
+  }
+  updateIngredientsEmptyState();
+
+  ingredientNameInput.addEventListener('input', function(){
+    if(ingredientNameInput.value.trim()) clearInvalid(ingredientNameInput, 'input-error');
+  });
+
   document.getElementById('add-ingredient-btn').addEventListener('click', function(){
-    var nameInput = document.getElementById('ingredient-name');
     var qtyInput = document.getElementById('ingredient-qty');
     var unitSelect = document.getElementById('ingredient-unit');
-    var name = nameInput.value.trim() || 'Ингредиент';
+
+    clearInvalid(ingredientNameInput, 'input-error');
+    if(!ingredientNameInput.value.trim()){
+      setInvalid(ingredientNameInput, 'Введите название ингредиента', 'input-error');
+      focusInvalid(ingredientNameInput);
+      return;
+    }
+
+    var name = ingredientNameInput.value.trim();
     var qty = qtyInput.value || '1';
     var unit = unitSelect.value || 'шт';
 
@@ -1009,10 +1022,11 @@
       '<span class="ingredient-name">' + escapeHtml(name) + '</span>' +
       '<span class="ingredient-qty">' + escapeHtml(qty) + ' ' + escapeHtml(unit) + '</span>' +
       '<button class="icon-btn ingredient-remove" type="button" aria-label="Удалить">' + ICON_CLOSE + '</button>';
-    document.getElementById('ingredient-list').appendChild(row);
+    ingredientList.appendChild(row);
 
-    nameInput.value = '';
+    ingredientNameInput.value = '';
     qtyInput.value = '1';
+    updateIngredientsEmptyState();
   });
 
   /* ===================== Сохранить рецепт ===================== */
@@ -1031,13 +1045,14 @@
     if(stepRemove){
       var block = stepRemove.closest('.step-block');
       if(block) block.remove();
-      renumberSteps();
+      refreshSteps();
       return;
     }
     var ingRemove = e.target.closest('.ingredient-remove');
     if(ingRemove){
       var row = ingRemove.closest('.ingredient-row');
       if(row) row.remove();
+      updateIngredientsEmptyState();
       return;
     }
     var dz = e.target.closest('.photo-dropzone');
@@ -1059,10 +1074,10 @@
     }
   });
 
-  /* ===================== Drag & drop (шаги / ингредиенты) ===================== */
-  function makeSortable(container, itemSelector, handleSelector, onDrop){
+  /* ===================== Drag & drop (полноценная сортировка по всему списку) ===================== */
+  function makeSortable(container, itemSelector, handleSelector, onDrop, anchorEl){
     if(!container) return;
-    var dragEl = null, startY = 0, scrollParent = null, prevOverflow = '';
+    var dragEl = null, lastY = 0, translateY = 0, scrollParent = null, prevOverflow = '';
 
     container.addEventListener('pointerdown', function(e){
       var handle = e.target.closest(handleSelector);
@@ -1070,41 +1085,57 @@
       var item = handle.closest(itemSelector);
       if(!item) return;
       e.preventDefault();
+
       dragEl = item;
-      startY = e.clientY;
-      dragEl.classList.add('dragging');
+      lastY = e.clientY;
+      translateY = 0;
+      dragEl.style.transform = 'translateY(0px)';
       dragEl.style.position = 'relative';
       dragEl.style.zIndex = '5';
+      dragEl.classList.add('dragging');
+
       scrollParent = container.closest('.modal-content');
       if(scrollParent){ prevOverflow = scrollParent.style.overflowY; scrollParent.style.overflowY = 'hidden'; }
+
       document.addEventListener('pointermove', onMove);
       document.addEventListener('pointerup', onUp);
       document.addEventListener('pointercancel', onUp);
     });
 
-    function onMove(e){
-      if(!dragEl) return;
-      var dy = e.clientY - startY;
-      dragEl.style.transform = 'translateY(' + dy + 'px)';
-      var siblings = Array.prototype.slice.call(container.querySelectorAll(itemSelector)).filter(function(el){ return el !== dragEl; });
+    function reorderIfNeeded(){
       var dragRect = dragEl.getBoundingClientRect();
       var dragCenter = dragRect.top + dragRect.height / 2;
+
+      var siblings = Array.prototype.slice.call(container.querySelectorAll(itemSelector)).filter(function(el){ return el !== dragEl; });
+      var target = null;
       for(var i = 0; i < siblings.length; i++){
-        var sib = siblings[i];
-        var sibRect = sib.getBoundingClientRect();
-        var sibCenter = sibRect.top + sibRect.height / 2;
-        if(dy > 0 && dragCenter > sibCenter){
-          container.insertBefore(dragEl, sib.nextSibling);
-          startY = e.clientY;
-          dragEl.style.transform = 'translateY(0px)';
-          break;
-        } else if(dy < 0 && dragCenter < sibCenter){
-          container.insertBefore(dragEl, sib);
-          startY = e.clientY;
-          dragEl.style.transform = 'translateY(0px)';
-          break;
-        }
+        var r = siblings[i].getBoundingClientRect();
+        var c = r.top + r.height / 2;
+        if(dragCenter < c){ target = siblings[i]; break; }
       }
+
+      var effectiveTarget = target || anchorEl || null;
+      var needsMove = effectiveTarget ? (dragEl.nextElementSibling !== effectiveTarget) : (container.lastElementChild !== dragEl);
+      if(!needsMove) return;
+
+      dragEl.style.transform = 'none';
+      var staticBefore = dragEl.getBoundingClientRect().top;
+
+      if(effectiveTarget){ container.insertBefore(dragEl, effectiveTarget); }
+      else { container.appendChild(dragEl); }
+
+      var staticAfter = dragEl.getBoundingClientRect().top;
+      translateY += (staticBefore - staticAfter);
+      dragEl.style.transform = 'translateY(' + translateY + 'px)';
+    }
+
+    function onMove(e){
+      if(!dragEl) return;
+      var deltaY = e.clientY - lastY;
+      lastY = e.clientY;
+      translateY += deltaY;
+      dragEl.style.transform = 'translateY(' + translateY + 'px)';
+      reorderIfNeeded();
     }
     function onUp(){
       if(!dragEl) return;
@@ -1120,8 +1151,8 @@
       if(onDrop) onDrop();
     }
   }
-  makeSortable(document.getElementById('steps-container'), '.step-block', '.drag-handle', renumberSteps);
-  makeSortable(document.getElementById('ingredient-list'), '.ingredient-row', '.drag-handle');
+  makeSortable(stepsContainer, '.step-block', '.drag-handle', refreshSteps, addStepBtn);
+  makeSortable(ingredientList, '.ingredient-row', '.drag-handle', null, null);
 
   /* ===================== Большие списки: типы блюд / кухни / особенности / повод ===================== */
   var dishTypePopular = ['Завтраки','Первые блюда','Вторые блюда','Салаты','Десерты','Выпечка','Напитки','Закуски'];
@@ -1156,10 +1187,10 @@
     };
   }
 
-  var dishTypeField = makeField('Типы блюд', true, dishTypeGroups, dishTypePopular, ['Первые блюда'], 'dish-type-chips');
-  var cuisineField = makeField('Национальные кухни', false, cuisineFlat, cuisinePopular, ['Итальянская'], 'cuisine-chips');
-  var featuresField = makeField('Особенности блюда', false, featuresFlat, featuresPopular, ['Быстро','Без глютена'], 'features-chips');
-  var occasionField = makeField('Повод', false, occasionFlat, occasionPopular, ['День рождения'], 'occasion-chips');
+  var dishTypeField = makeField('Типы блюд', true, dishTypeGroups, dishTypePopular, [], 'dish-type-chips');
+  var cuisineField = makeField('Национальные кухни', false, cuisineFlat, cuisinePopular, [], 'cuisine-chips');
+  var featuresField = makeField('Особенности блюда', false, featuresFlat, featuresPopular, [], 'features-chips');
+  var occasionField = makeField('Повод', false, occasionFlat, occasionPopular, [], 'occasion-chips');
 
   function renderFieldChips(field){
     var container = field.chipsContainer;
@@ -1192,6 +1223,8 @@
     moreBtn.textContent = '+ Показать все';
     moreBtn.addEventListener('click', function(){ openSelector(field); });
     container.appendChild(moreBtn);
+
+    if(field.selected.size > 0) clearInvalid(container, 'section-invalid');
   }
 
   [dishTypeField, cuisineField, featuresField, occasionField].forEach(renderFieldChips);
@@ -1278,6 +1311,143 @@
       empty.textContent = 'Ничего не найдено';
       selectorList.appendChild(empty);
     }
+  }
+
+  /* ===================== Валидация шагов формы ===================== */
+  var dishNameInput = document.getElementById('dish-name-input');
+  var dishDescTextarea = document.getElementById('dish-desc-textarea');
+  var textDescriptionTextarea = document.getElementById('text-description-textarea');
+
+  dishNameInput.addEventListener('input', function(){ if(dishNameInput.value.trim()) clearInvalid(dishNameInput, 'input-error'); });
+  dishDescTextarea.addEventListener('input', function(){ if(dishDescTextarea.value.trim()) clearInvalid(dishDescTextarea, 'input-error'); });
+  textDescriptionTextarea.addEventListener('input', function(){ if(textDescriptionTextarea.value.trim()) clearInvalid(textDescriptionTextarea, 'input-error'); });
+
+  function validateStep1(){
+    var firstInvalid = null;
+    var valid = true;
+
+    clearInvalid(dishNameInput, 'input-error');
+    if(!dishNameInput.value.trim()){
+      setInvalid(dishNameInput, 'Укажите название блюда', 'input-error');
+      valid = false; firstInvalid = firstInvalid || dishNameInput;
+    }
+
+    clearInvalid(dishDescTextarea, 'input-error');
+    if(!dishDescTextarea.value.trim()){
+      setInvalid(dishDescTextarea, 'Добавьте описание блюда', 'input-error');
+      valid = false; firstInvalid = firstInvalid || dishDescTextarea;
+    }
+
+    var dishTypeContainer = document.getElementById('dish-type-chips');
+    clearInvalid(dishTypeContainer, 'section-invalid');
+    if(dishTypeField.selected.size === 0){
+      setInvalid(dishTypeContainer, 'Выберите хотя бы один тип блюда', 'section-invalid');
+      valid = false; firstInvalid = firstInvalid || dishTypeContainer;
+    }
+
+    if(firstInvalid) focusInvalid(firstInvalid);
+    return valid;
+  }
+
+  function validateStep2(){
+    var activeMode = document.querySelector('#description-mode-toggle .segmented-btn.active').dataset.mode;
+    var firstInvalid = null;
+    var valid = true;
+
+    if(activeMode === 'steps'){
+      clearInvalid(stepsContainer, 'section-invalid');
+      var textareas = stepsContainer.querySelectorAll('.step-block textarea');
+      var hasFilled = Array.prototype.some.call(textareas, function(t){ return t.value.trim().length > 0; });
+      if(textareas.length === 0 || !hasFilled){
+        setInvalid(stepsContainer, 'Добавьте хотя бы один шаг с описанием', 'section-invalid');
+        valid = false; firstInvalid = stepsContainer;
+      }
+    } else {
+      clearInvalid(textDescriptionTextarea, 'input-error');
+      if(!textDescriptionTextarea.value.trim()){
+        setInvalid(textDescriptionTextarea, 'Опишите процесс приготовления', 'input-error');
+        valid = false; firstInvalid = textDescriptionTextarea;
+      }
+    }
+
+    if(firstInvalid) focusInvalid(firstInvalid);
+    return valid;
+  }
+
+  function validateStep3(){
+    clearInvalid(ingredientList, 'section-invalid');
+    var count = ingredientList.querySelectorAll('.ingredient-row').length;
+    if(count === 0){
+      setInvalid(ingredientList, 'Добавьте хотя бы один ингредиент', 'section-invalid');
+      focusInvalid(ingredientList);
+      return false;
+    }
+    return true;
+  }
+
+  document.getElementById('step1-next-btn').addEventListener('click', function(){
+    if(validateStep1()) showScreen('screen-step2');
+  });
+  document.getElementById('step2-next-btn').addEventListener('click', function(){
+    if(validateStep2()) showScreen('screen-step3');
+  });
+  document.getElementById('step3-next-btn').addEventListener('click', function(){
+    if(validateStep3()) showScreen('screen-step4');
+  });
+
+  /* ===================== Полный сброс формы (при выходе / после сохранения) ===================== */
+  function resetRecipeForm(){
+    // Шаг 1
+    dishNameInput.value = '';
+    dishDescTextarea.value = '';
+    clearInvalid(dishNameInput, 'input-error');
+    clearInvalid(dishDescTextarea, 'input-error');
+    document.getElementById('calorie-input').value = '';
+    document.getElementById('servings-input').value = '1';
+
+    document.querySelectorAll('.chip-group').forEach(function(group){
+      group.querySelectorAll('.chip-btn').forEach(function(b){ b.classList.remove('selected'); });
+      var customRow = group.parentElement.querySelector('.custom-time-row');
+      if(customRow){
+        customRow.hidden = true;
+        var inp = customRow.querySelector('input'); if(inp) inp.value = '';
+        var sel = customRow.querySelector('select'); if(sel) sel.selectedIndex = 0;
+      }
+    });
+
+    dishTypeField.selected = new Set();
+    cuisineField.selected = new Set();
+    featuresField.selected = new Set();
+    occasionField.selected = new Set();
+    [dishTypeField, cuisineField, featuresField, occasionField].forEach(renderFieldChips);
+    clearInvalid(document.getElementById('dish-type-chips'), 'section-invalid');
+
+    coverPreview.style.backgroundImage = '';
+    coverPreviewWrap.hidden = true;
+    coverDropzone.hidden = false;
+
+    // Шаг 2
+    stepsContainer.querySelectorAll('.step-block').forEach(function(b){ b.remove(); });
+    refreshSteps();
+    clearInvalid(stepsContainer, 'section-invalid');
+    textDescriptionTextarea.value = '';
+    clearInvalid(textDescriptionTextarea, 'input-error');
+    modeButtons.forEach(function(b){ b.classList.remove('active'); });
+    modeButtons[0].classList.add('active');
+    modeSteps.hidden = false;
+    modeText.hidden = true;
+
+    // Шаг 3
+    ingredientList.querySelectorAll('.ingredient-row').forEach(function(r){ r.remove(); });
+    updateIngredientsEmptyState();
+    clearInvalid(ingredientList, 'section-invalid');
+    ingredientNameInput.value = '';
+    clearInvalid(ingredientNameInput, 'input-error');
+    document.getElementById('ingredient-qty').value = '1';
+    document.getElementById('ingredient-unit').selectedIndex = 0;
+
+    // Шаг 4
+    document.getElementById('cooking-method-select').selectedIndex = 0;
   }
 
 })();
