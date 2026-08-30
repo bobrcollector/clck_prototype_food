@@ -283,15 +283,45 @@
   .success-text a{color:var(--text);}
   .success-actions{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:14px;}
 
-  @media (max-width:480px){
-    html, body{ height:100%; overflow:hidden; }
-    .stage{padding:0;gap:0;}
-    .stage-caption{display:none;}
-    .device{
-      width:100vw; height:100vh; height:100dvh;
-      max-height:none; border-radius:0; box-shadow:none;
-    }
+@media (max-width:480px){
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
+  
+  .stage {
+    padding: 0;
+    gap: 0;
+    height: 100%;
+    width: 100%;
+    min-height: 100%;
+  }
+  
+  .stage-caption {
+    display: none;
+  }
+  
+  .device {
+    width: 100vw;
+    height: 100vh;
+    height: -webkit-fill-available;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+    position: relative;
+  }
+  
+  .screen {
+    height: 100%;
+    height: -webkit-fill-available;
+    height: 100dvh;
+  }
+}
 </style>
 </head>
 <body>
@@ -1450,6 +1480,28 @@
     document.getElementById('cooking-method-select').selectedIndex = 0;
   }
 
+})();
+</script>
+<script>
+(function(){
+  // Фикс для мобильных устройств
+  function fixMobileHeight() {
+    if (window.innerWidth <= 480) {
+      var device = document.getElementById('device');
+      var screens = document.querySelectorAll('.screen');
+      var h = window.innerHeight;
+      device.style.height = h + 'px';
+      screens.forEach(function(screen) {
+        screen.style.height = h + 'px';
+      });
+    }
+  }
+  
+  fixMobileHeight();
+  window.addEventListener('resize', fixMobileHeight);
+  window.addEventListener('orientationchange', function() {
+    setTimeout(fixMobileHeight, 300);
+  });
 })();
 </script>
 </body>
