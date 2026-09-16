@@ -80,8 +80,7 @@
   .skeleton-card{display:flex;flex-direction:column;gap:8px;}
   .skeleton-block{
     border-radius:8px;
-    background:linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 37%, var(--gray-200) 63%);
-    background-size:400% 100%; animation:shimmer 1.6s ease-in-out infinite;
+    background:var(--gray-200);
   }
   .skeleton-img{height:160px;border-radius:14px;}
   .skeleton-row{display:flex;align-items:center;gap:8px;}
@@ -89,8 +88,6 @@
   .skeleton-line{height:11px;}
   .skeleton-line.w-70{width:70%;}
   .skeleton-line.w-40{width:40%;}
-  @keyframes shimmer{0%{background-position:100% 0;}100%{background-position:-100% 0;}}
-  @media (prefers-reduced-motion: reduce){ .skeleton-block{animation:none;} }
 
   /* Bottom nav — всегда зафиксирована внизу экрана (flex:0 0 auto в колонке) */
   .bottom-nav{flex:0 0 auto; display:flex; border-top:1px solid var(--border); background:#fff;}
@@ -281,47 +278,24 @@
   .success-title{font-size:18px;font-weight:700;margin:4px 0 0;}
   .success-text{font-size:13px;color:var(--gray-600);line-height:1.55;margin:0;}
   .success-text a{color:var(--text);}
-  .success-actions{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:14px;}
+  .success-actions{width:100%;display:flex;flex-direction:column;gap:6px;margin-top:14px;}
+  .success-links{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px;}
+  .link-btn{background:none;border:none;color:var(--gray-700);font-size:13.5px;font-weight:600;cursor:pointer;padding:8px 6px;text-decoration:underline;text-underline-offset:3px;}
+  .link-btn:hover{color:var(--text);}
+  .link-sep{color:var(--gray-400);font-size:13px;}
 
-@media (max-width:480px){
-  html, body {
-    height: 100%;
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+  @media (max-width:480px){
+    html, body{ height:100%; overflow:hidden; }
+    .stage{
+      padding:0;gap:0;
+      min-height:100vh; min-height:100dvh;
+    }
+    .stage-caption{display:none;}
+    .device{
+      width:100vw; height:100vh; height:100dvh;
+      max-height:none; border-radius:0; box-shadow:none;
+    }
   }
-  
-  .stage {
-    padding: 0;
-    gap: 0;
-    height: 100%;
-    width: 100%;
-    min-height: 100%;
-  }
-  
-  .stage-caption {
-    display: none;
-  }
-  
-  .device {
-    width: 100vw;
-    height: 100vh;
-    height: -webkit-fill-available;
-    height: 100dvh;
-    max-height: none;
-    border-radius: 0;
-    box-shadow: none;
-    position: relative;
-  }
-  
-  .screen {
-    height: 100%;
-    height: -webkit-fill-available;
-    height: 100dvh;
-  }
-}
 </style>
 </head>
 <body>
@@ -715,11 +689,15 @@
       </div>
       <div class="success-content">
         <div class="success-photo"></div>
-        <p class="success-title">Спасибо! Отправили рецепт на модерацию.</p>
-        <p class="success-text">Рецепт сохранен в <a href="#" id="drafts-link">черновики</a> и виден только вам, пока вы не опубликуете его</p>
+        <p class="success-title">Рецепт сохранён в черновики</p>
+        <p class="success-text">Он виден только вам. Проверьте детали и опубликуйте, когда будете готовы поделиться рецептом с другими.</p>
         <div class="success-actions">
-          <button class="btn-secondary" type="button" data-action="finish">Посмотреть рецепт</button>
-          <button class="btn-primary" type="button" data-action="finish">На главную</button>
+          <button class="btn-primary" type="button" id="publish-recipe-btn">Опубликовать</button>
+          <div class="success-links">
+            <button class="link-btn" type="button" data-action="finish">Посмотреть рецепт</button>
+            <span class="link-sep">·</span>
+            <button class="link-btn" type="button" data-action="finish">На главную</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1061,7 +1039,10 @@
 
   /* ===================== Сохранить рецепт ===================== */
   document.getElementById('save-recipe-btn').addEventListener('click', function(){ showScreen('screen-success'); });
-  document.getElementById('drafts-link').addEventListener('click', function(e){ e.preventDefault(); });
+  document.getElementById('publish-recipe-btn').addEventListener('click', function(){
+    showScreen('screen-main');
+    showToast('Рецепт опубликован');
+  });
 
   /* ===================== Делегирование кликов ===================== */
   document.addEventListener('click', function(e){
@@ -1480,28 +1461,6 @@
     document.getElementById('cooking-method-select').selectedIndex = 0;
   }
 
-})();
-</script>
-<script>
-(function(){
-  // Фикс для мобильных устройств
-  function fixMobileHeight() {
-    if (window.innerWidth <= 480) {
-      var device = document.getElementById('device');
-      var screens = document.querySelectorAll('.screen');
-      var h = window.innerHeight;
-      device.style.height = h + 'px';
-      screens.forEach(function(screen) {
-        screen.style.height = h + 'px';
-      });
-    }
-  }
-  
-  fixMobileHeight();
-  window.addEventListener('resize', fixMobileHeight);
-  window.addEventListener('orientationchange', function() {
-    setTimeout(fixMobileHeight, 300);
-  });
 })();
 </script>
 </body>
