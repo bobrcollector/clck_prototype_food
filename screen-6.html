@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Рецепт сохранён</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;family=Lobster&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="draft.js" defer></script>
+  <script src="result.js" defer></script>
+  <script src="header-scroll.js" defer></script>
+  <script src="add-sheet.js" defer></script>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M13.73 21C13.5542 21.3031 13.3018 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.9044 11.0018 21.7295C10.6982 21.5547 10.4458 21.3031 10.27 21M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12H19M12 19L19 12L12 5" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-recipe-add" viewBox="0 0 24 24"><path d="M4 9H20" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 9V17C5 18.6569 6.34315 20 8 20H16C17.6569 20 19 18.6569 19 17V9" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5V9" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 13H5M19 13H22" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-edit-3" viewBox="0 0 24 24"><path d="M12 20H21M16.5 3.49998C16.8978 3.10216 17.4374 2.87866 18 2.87866C18.2786 2.87866 18.5544 2.93353 18.8118 3.04014C19.0692 3.14674 19.303 3.303 19.5 3.49998C19.697 3.69697 19.8532 3.93082 19.9598 4.18819C20.0665 4.44556 20.1213 4.72141 20.1213 4.99998C20.1213 5.27856 20.0665 5.55441 19.9598 5.81178C19.8532 6.06915 19.697 6.303 19.5 6.49998L7 19L3 20L4 16L16.5 3.49998Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M9 22V12H15V22M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><path d="M10 3H3V10H10V3Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 3H14V10H21V3Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 14H14V21H21V14Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14H3V21H10V14Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M19 21L12 16L5 21V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V21Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><path d="M12.0003 5.99983V12.0003L16.0006 14.0005M22.0011 12.0003C22.0011 17.5236 17.5236 22.0011 12.0003 22.0011C6.47702 22.0011 1.99951 17.5236 1.99951 12.0003C1.99951 6.47702 6.47702 1.99951 12.0003 1.99951C17.5236 1.99951 22.0011 6.47702 22.0011 12.0003Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="screen">
+
+  <header class="topbar">
+    <a class="topbar__logo" href="screen-1.html">RussFood</a>
+    <button class="btn btn--ghost btn--icon" type="button" aria-label="Уведомления"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bell"/></svg></button>
+  </header>
+
+  <main class="screen__main result">
+
+    <img class="result__illustration" src="images/web/result-illustration.svg" alt="" width="240" height="180">
+
+    <div class="result__text">
+      <h1 class="t-headline-s">Рецепт сохранён в черновики</h1>
+      <p class="t-body-l text-secondary">Пока его видите только вы. Опубликуйте, чтобы он появился в ленте</p>
+    </div>
+
+    <article class="result__card"><a class="card card--horizontal" id="result-card" href="screen-1.html"><img class="card__media" id="result-cover" src="images/web/potatoes-mushrooms.jpg" alt="" loading="lazy"><div class="card__body"><h2 class="card__title" id="result-title">Картофель с грибами</h2><p class="card__text" id="result-text">Молодой картофель, обжаренный с шампиньонами и луком на одной сковороде</p><p class="card__meta" id="result-meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span id="result-time">30 мин</span></p></div></a></article>
+
+    <div class="result__actions">
+      <a class="btn btn--primary btn--block" href="screen-1.html">Опубликовать</a>
+      <a class="btn btn--secondary btn--block" href="screen-1.html">К черновикам</a>
+    </div>
+
+  </main>
+
+  <nav class="tabbar" aria-label="Основная навигация">
+    <a class="tabbar__item" href="screen-1.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-home"/></svg>Главная</a>
+    <a class="tabbar__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg>Подборки</a>
+    <a class="tabbar__item tabbar__item--add" id="add-trigger" href="screen-2.html?new" role="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Добавить"><span class="tabbar__add"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></span></a>
+    <a class="tabbar__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bookmark"/></svg>Избранное</a>
+    <a class="tabbar__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-user"/></svg>Профиль</a>
+  </nav>
+
+</div>
+
+<div class="overlay" id="add-sheet">
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Что добавить">
+    <span class="sheet__handle" aria-hidden="true"></span>
+    <ul>
+      <li><a class="sheet__item" href="screen-2.html?new"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-recipe-add"/></svg>Добавить рецепт</a></li>
+      <li><a class="sheet__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-edit-3"/></svg>Написать статью</a></li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

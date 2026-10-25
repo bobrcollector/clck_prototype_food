@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Компоненты RussianFood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8V12M12 16H12.01" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12A10 10 0 1 1 16.07 2.86" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 4L12 14.01L9 11.01" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-grip" viewBox="0 0 24 24"><path d="M9 5H9.01M9 12H9.01M9 19H9.01M15 5H15.01M15 12H15.01M15 19H15.01" stroke="currentColor" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-recipe-add" viewBox="0 0 24 24"><path d="M4 9H20" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 9V17C5 18.6569 6.34315 20 8 20H16C17.6569 20 19 18.6569 19 17V9" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5V9" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 13H5M19 13H22" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-edit-3" viewBox="0 0 24 24"><path d="M12 20H21M16.5 3.49998C16.8978 3.10216 17.4374 2.87866 18 2.87866C18.2786 2.87866 18.5544 2.93353 18.8118 3.04014C19.0692 3.14674 19.303 3.303 19.5 3.49998C19.697 3.69697 19.8532 3.93082 19.9598 4.18819C20.0665 4.44556 20.1213 4.72141 20.1213 4.99998C20.1213 5.27856 20.0665 5.55441 19.9598 5.81178C19.8532 6.06915 19.697 6.303 19.5 6.49998L7 19L3 20L4 16L16.5 3.49998Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M12 5L5 12L12 19" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12H19" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6H5M5 6H21M5 6V20C5 20.5304 5.21071 21.0391 5.58579 21.4142C5.96086 21.7893 6.46957 22 7 22H17C17.5304 22 18.0391 21.7893 18.4142 21.4142C18.7893 21.0391 19 20.5304 19 20V6M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 17C14.2091 17 16 15.2091 16 13C16 10.7909 14.2091 9 12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M9 22V12H15V22M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><path d="M10 3H3V10H10V3Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 3H14V10H21V3Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 14H14V21H21V14Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14H3V21H10V14Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M19 21L12 16L5 21V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V21Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><path d="M12.0003 5.99983V12.0003L16.0006 14.0005M22.0011 12.0003C22.0011 17.5236 17.5236 22.0011 12.0003 22.0011C6.47702 22.0011 1.99951 17.5236 1.99951 12.0003C1.99951 6.47702 6.47702 1.99951 12.0003 1.99951C17.5236 1.99951 22.0011 6.47702 22.0011 12.0003Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.06202 11.6533C1.97868 11.8779 1.97868 12.1248 2.06202 12.3493C2.87372 14.3175 4.25153 16.0003 6.02079 17.1844C7.79004 18.3686 9.87106 19.0007 12 19.0007C14.129 19.0007 16.21 18.3686 17.9792 17.1844C19.7485 16.0003 21.1263 14.3175 21.938 12.3493C22.0214 12.1248 22.0214 11.8779 21.938 11.6533C21.1263 9.68519 19.7485 8.00238 17.9792 6.81824C16.21 5.63409 14.129 5.00195 12 5.00195C9.87106 5.00195 7.79004 5.63409 6.02079 6.81824C4.25153 8.00238 2.87372 9.68519 2.06202 11.6533Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="doc">
+
+  <header class="doc-header">
+    <h1 class="t-headline-s">Компоненты RussianFood</h1>
+    <p class="t-body-m text-secondary">Мобильная версия. Значения только из tokens.json. Состояния hover, focus-visible и active показаны классами is-hover, is-focus-visible, is-active — в интерфейсе они работают через псевдоклассы.</p>
+    <nav class="doc-nav" aria-label="Разделы">
+      <a href="#colors">Цвета</a>
+      <a href="#type">Текст</a>
+      <a href="#buttons">Кнопки</a>
+      <a href="#inputs">Инпуты</a>
+      <a href="#selects">Select</a>
+      <a href="#search-input">Поиск</a>
+      <a href="#dropdown">Список</a>
+      <a href="#checkboxes">Чекбокс</a>
+      <a href="#radios">Радио</a>
+      <a href="#badges">Бейджи</a>
+      <a href="#chips">Чипсы</a>
+      <a href="#counter">Счётчик</a>
+      <a href="#cards">Карточки</a>
+      <a href="#card-horizontal">Карточка гориз.</a>
+      <a href="#stepper">Степпер</a>
+      <a href="#upload">Обложка</a>
+      <a href="#sheet">Шторка</a>
+      <a href="#tabbar">Таб-бар</a>
+      <a href="#ingredient">Ингредиент</a>
+      <a href="#recipe-step">Карточка шага</a>
+      <a href="#upload-compact">Фото шага</a>
+      <a href="#picker">Окно выбора</a>
+      <a href="#dialog">Диалог</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- 0. Цвета -->
+    <section class="doc-section" id="colors" aria-labelledby="colors-h">
+      <h2 class="t-title-l" id="colors-h">Цвета</h2>
+      <ul class="doc-group doc-grid">
+        <li class="sw sw--primary"><span>primary<br><span class="text-muted">#C0470E</span></span></li>
+        <li class="sw sw--primary-hover"><span>primary-hover<br><span class="text-muted">#9C3A0C</span></span></li>
+        <li class="sw sw--primary-pressed"><span>primary-pressed<br><span class="text-muted">#7A2D09</span></span></li>
+        <li class="sw sw--primary-subtle"><span>primary-subtle<br><span class="text-muted">#FFEFE3</span></span></li>
+        <li class="sw sw--text-primary"><span>text-primary<br><span class="text-muted">#2B211A</span></span></li>
+        <li class="sw sw--text-secondary"><span>text-secondary<br><span class="text-muted">#5C4B3D</span></span></li>
+        <li class="sw sw--text-muted"><span>text-muted<br><span class="text-muted">#75614F</span></span></li>
+        <li class="sw sw--bg"><span>bg<br><span class="text-muted">#FDF6EC</span></span></li>
+        <li class="sw sw--surface"><span>surface<br><span class="text-muted">#FFFFFF</span></span></li>
+        <li class="sw sw--surface-2"><span>surface-2<br><span class="text-muted">#F7EAD3</span></span></li>
+        <li class="sw sw--border"><span>border<br><span class="text-muted">#E8D9C4</span></span></li>
+        <li class="sw sw--border-strong"><span>border-strong<br><span class="text-muted">#8F7B67</span></span></li>
+        <li class="sw sw--error"><span>error<br><span class="text-muted">#B3261E</span></span></li>
+        <li class="sw sw--success"><span>success<br><span class="text-muted">#2A7430</span></span></li>
+        <li class="sw sw--warning"><span>warning<br><span class="text-muted">#8A5A00</span></span></li>
+        <li class="sw sw--error-subtle"><span>error-subtle<br><span class="text-muted">#FCE4E1</span></span></li>
+        <li class="sw sw--success-subtle"><span>success-subtle<br><span class="text-muted">#E3F1E1</span></span></li>
+        <li class="sw sw--warning-subtle"><span>warning-subtle<br><span class="text-muted">#FBEFD2</span></span></li>
+      </ul>
+    </section>
+
+    <!-- 0. Типографика -->
+    <section class="doc-section" id="type" aria-labelledby="type-h">
+      <h2 class="t-title-l" id="type-h">Текст</h2>
+      <div class="doc-group">
+        <div class="doc-item"><span class="doc-caption">headline-l · 32/40 · 400</span><p class="t-headline-l">Рецепт сохранён</p></div>
+        <div class="doc-item"><span class="doc-caption">headline-s · 24/32 · 400</span><p class="t-headline-s">Основная информация</p></div>
+        <div class="doc-item"><span class="doc-caption">title-l · 22/32 · 400</span><p class="t-title-l">Что добавить</p></div>
+        <div class="doc-item"><span class="doc-caption">title-m · 16/24 · 500</span><p class="t-title-m">Название рецепта</p></div>
+        <div class="doc-item"><span class="doc-caption">body-l · 16/24 · 400</span><p class="t-body-l">Борщ с говядиной и сметаной</p></div>
+        <div class="doc-item"><span class="doc-caption">body-m · 14/24 · 400</span><p class="t-body-m">Название начинается с большой буквы</p></div>
+        <div class="doc-item"><span class="doc-caption">label-l · 14/24 · 500</span><p class="t-label-l">Шаг 1 из 4</p></div>
+        <div class="doc-item"><span class="doc-caption">label-m · 12/16 · 500</span><p class="t-label-m">Черновик</p></div>
+      </div>
+    </section>
+
+    <!-- 1. Кнопки -->
+    <section class="doc-section" id="buttons" aria-labelledby="buttons-h">
+      <h2 class="t-title-l" id="buttons-h">Кнопка .btn</h2>
+      <p class="t-body-m text-secondary">Варианты primary, secondary, ghost. Размеры L (48) и M (40).</p>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">primary</h3>
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">default</span><button class="btn btn--primary" type="button">Дальше</button></div>
+          <div class="doc-item"><span class="doc-caption">hover</span><button class="btn btn--primary is-hover" type="button">Дальше</button></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span><button class="btn btn--primary is-focus-visible" type="button">Дальше</button></div>
+          <div class="doc-item"><span class="doc-caption">active</span><button class="btn btn--primary is-active" type="button">Дальше</button></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span><button class="btn btn--primary" type="button" disabled>Дальше</button></div>
+          <div class="doc-item"><span class="doc-caption">is-loading</span><button class="btn btn--primary is-loading" type="button" aria-busy="true">Сохраняем…</button></div>
+          <div class="doc-item"><span class="doc-caption">is-success</span><button class="btn btn--primary is-success" type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Сохранено</button></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">secondary</h3>
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">default</span><button class="btn btn--secondary" type="button">Назад</button></div>
+          <div class="doc-item"><span class="doc-caption">hover</span><button class="btn btn--secondary is-hover" type="button">Назад</button></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span><button class="btn btn--secondary is-focus-visible" type="button">Назад</button></div>
+          <div class="doc-item"><span class="doc-caption">active</span><button class="btn btn--secondary is-active" type="button">Назад</button></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span><button class="btn btn--secondary" type="button" disabled>Назад</button></div>
+          <div class="doc-item"><span class="doc-caption">is-loading</span><button class="btn btn--secondary is-loading" type="button" aria-busy="true">Загружаем…</button></div>
+          <div class="doc-item"><span class="doc-caption">is-success</span><button class="btn btn--secondary is-success" type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Готово</button></div>
+          <div class="doc-item"><span class="doc-caption">с иконкой</span><button class="btn btn--secondary" type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>Добавить</button></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">ghost</h3>
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">default</span><button class="btn btn--ghost" type="button">К черновикам</button></div>
+          <div class="doc-item"><span class="doc-caption">hover</span><button class="btn btn--ghost is-hover" type="button">К черновикам</button></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span><button class="btn btn--ghost is-focus-visible" type="button">К черновикам</button></div>
+          <div class="doc-item"><span class="doc-caption">active</span><button class="btn btn--ghost is-active" type="button">К черновикам</button></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span><button class="btn btn--ghost" type="button" disabled>К черновикам</button></div>
+          <div class="doc-item"><span class="doc-caption">is-loading</span><button class="btn btn--ghost is-loading" type="button" aria-busy="true">Открываем…</button></div>
+          <div class="doc-item"><span class="doc-caption">is-success</span><button class="btn btn--ghost is-success" type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Готово</button></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">размер M (40)</h3>
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">primary</span><button class="btn btn--primary btn--m" type="button">Дальше</button></div>
+          <div class="doc-item"><span class="doc-caption">secondary</span><button class="btn btn--secondary btn--m" type="button">Назад</button></div>
+          <div class="doc-item"><span class="doc-caption">ghost</span><button class="btn btn--ghost btn--m" type="button">Отмена</button></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">кнопка-иконка (ghost)</h3>
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">default</span><button class="btn btn--ghost btn--icon" type="button" aria-label="Закрыть"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+          <div class="doc-item"><span class="doc-caption">hover</span><button class="btn btn--ghost btn--icon is-hover" type="button" aria-label="Закрыть"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span><button class="btn btn--ghost btn--icon is-focus-visible" type="button" aria-label="Закрыть"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+          <div class="doc-item"><span class="doc-caption">active</span><button class="btn btn--ghost btn--icon is-active" type="button" aria-label="Закрыть"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span><button class="btn btn--ghost btn--icon" type="button" aria-label="Закрыть" disabled><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Инпут -->
+    <section class="doc-section" id="inputs" aria-labelledby="inputs-h">
+      <h2 class="t-title-l" id="inputs-h">Инпут .input</h2>
+      <p class="t-body-m text-secondary">Ошибка: рамка, иконка, текст, aria-invalid.</p>
+
+      <div class="doc-group">
+        <div class="doc-grid">
+          <div class="doc-item">
+            <span class="doc-caption">default</span>
+            <div class="input">
+              <label class="input__label" for="in-default">Название рецепта</label>
+              <div class="input__control"><input class="input__field" id="in-default" type="text" value="Борщ" required></div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">hover</span>
+            <div class="input is-hover">
+              <label class="input__label" for="in-hover">Название рецепта</label>
+              <div class="input__control"><input class="input__field" id="in-hover" type="text" value="Борщ" required></div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">focus-visible</span>
+            <div class="input is-focus-visible">
+              <label class="input__label" for="in-focus">Название рецепта</label>
+              <div class="input__control"><input class="input__field" id="in-focus" type="text" value="Борщ" required></div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">active</span>
+            <div class="input is-active">
+              <label class="input__label" for="in-active">Название рецепта</label>
+              <div class="input__control"><input class="input__field" id="in-active" type="text" value="Борщ" required></div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">disabled</span>
+            <div class="input">
+              <label class="input__label" for="in-disabled">Название рецепта</label>
+              <div class="input__control"><input class="input__field" id="in-disabled" type="text" value="Борщ" disabled></div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">is-empty</span>
+            <div class="input is-empty">
+              <label class="input__label" for="in-empty">Название рецепта</label>
+              <div class="input__control"><input class="input__field" id="in-empty" type="text" placeholder="Название" required></div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">is-error</span>
+            <div class="input is-error">
+              <label class="input__label" for="in-error">Название рецепта</label>
+              <div class="input__control"><input class="input__field" id="in-error" type="text" placeholder="Название" aria-invalid="true" aria-describedby="in-error-msg" required></div>
+              <p class="message is-error" id="in-error-msg" role="alert"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Введите название рецепта</span></p>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">is-loading</span>
+            <div class="input is-loading">
+              <label class="input__label" for="in-loading">Название рецепта</label>
+              <div class="input__control"><input class="input__field" id="in-loading" type="text" value="Борщ" aria-describedby="in-loading-msg" required></div>
+              <p class="message is-loading" id="in-loading-msg" aria-busy="true"><span>Проверяем название…</span></p>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">is-success</span>
+            <div class="input is-success">
+              <label class="input__label" for="in-success">Название рецепта</label>
+              <div class="input__control"><input class="input__field" id="in-success" type="text" value="Борщ" aria-describedby="in-success-msg" required></div>
+              <p class="message is-success" id="in-success-msg"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-check-circle"/></svg><span>Название подходит</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">с подсказкой и счётчиком</h3>
+        <div class="doc-grid doc-grid--1">
+          <div class="input">
+            <label class="input__label" for="in-hint">Название рецепта</label>
+            <div class="input__control"><input class="input__field" id="in-hint" type="text" value="Борщ с говядиной" aria-describedby="in-hint-text" required></div>
+            <div class="input__footer">
+              <p class="input__hint" id="in-hint-text">Начинайте с большой буквы, точку в конце не ставьте</p>
+              <p class="input__counter">16 / 80</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">многострочное поле</h3>
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item">
+            <span class="doc-caption">default</span>
+            <div class="input is-empty">
+              <label class="input__label" for="ta-default">Краткое описание</label>
+              <div class="input__control"><textarea class="input__field input__field--textarea" id="ta-default" rows="4" placeholder="1–2 предложения, анонсирующих рецепт" aria-describedby="ta-default-hint" required></textarea></div>
+              <p class="input__hint" id="ta-default-hint">1–2 предложения, анонсирующих рецепт</p>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">is-error</span>
+            <div class="input is-error">
+              <label class="input__label" for="ta-error">Краткое описание</label>
+              <div class="input__control"><textarea class="input__field input__field--textarea" id="ta-error" rows="4" aria-invalid="true" aria-describedby="ta-error-msg" required></textarea></div>
+              <p class="message is-error" id="ta-error-msg" role="alert"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Добавьте краткое описание</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Select -->
+    <section class="doc-section" id="selects" aria-labelledby="selects-h">
+      <h2 class="t-title-l" id="selects-h">Select .input--select</h2>
+
+      <div class="doc-group">
+        <div class="doc-grid">
+          <div class="doc-item">
+            <span class="doc-caption">default</span>
+            <div class="input input--select">
+              <label class="input__label" for="sel-default">Единица</label>
+              <div class="input__control">
+                <select class="input__field" id="sel-default" required><option>шт</option><option selected>г</option><option>кг</option><option>мл</option><option>л</option></select>
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">hover</span>
+            <div class="input input--select is-hover">
+              <label class="input__label" for="sel-hover">Единица</label>
+              <div class="input__control">
+                <select class="input__field" id="sel-hover" required><option selected>г</option><option>кг</option></select>
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">focus-visible</span>
+            <div class="input input--select is-focus-visible">
+              <label class="input__label" for="sel-focus">Единица</label>
+              <div class="input__control">
+                <select class="input__field" id="sel-focus" required><option selected>г</option><option>кг</option></select>
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">active</span>
+            <div class="input input--select is-active">
+              <label class="input__label" for="sel-active">Единица</label>
+              <div class="input__control">
+                <select class="input__field" id="sel-active" required><option selected>г</option><option>кг</option></select>
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">disabled</span>
+            <div class="input input--select">
+              <label class="input__label" for="sel-disabled">Единица</label>
+              <div class="input__control">
+                <select class="input__field" id="sel-disabled" disabled><option selected>г</option></select>
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">is-empty</span>
+            <div class="input input--select is-empty">
+              <label class="input__label" for="sel-empty">Единица</label>
+              <div class="input__control">
+                <select class="input__field" id="sel-empty" required><option value="" selected disabled>Выберите</option><option>шт</option><option>г</option></select>
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">is-error</span>
+            <div class="input input--select is-error is-empty">
+              <label class="input__label" for="sel-error">Единица</label>
+              <div class="input__control">
+                <select class="input__field" id="sel-error" aria-invalid="true" aria-describedby="sel-error-msg" required><option value="" selected disabled>Выберите</option><option>шт</option><option>г</option></select>
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+              </div>
+              <p class="message is-error" id="sel-error-msg" role="alert"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Выберите единицу</span></p>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">is-loading</span>
+            <div class="input input--select is-loading">
+              <label class="input__label" for="sel-loading">Единица</label>
+              <div class="input__control">
+                <select class="input__field" id="sel-loading" aria-describedby="sel-loading-msg" required><option selected>г</option></select>
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+              </div>
+              <p class="message is-loading" id="sel-loading-msg" aria-busy="true"><span>Загружаем список…</span></p>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">is-success</span>
+            <div class="input input--select is-success">
+              <label class="input__label" for="sel-success">Единица</label>
+              <div class="input__control">
+                <select class="input__field" id="sel-success" aria-describedby="sel-success-msg" required><option selected>г</option><option>кг</option></select>
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+              </div>
+              <p class="message is-success" id="sel-success-msg"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-check-circle"/></svg><span>Единица выбрана</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3b. Поиск -->
+    <section class="doc-section" id="search-input" aria-labelledby="search-input-h">
+      <h2 class="t-title-l" id="search-input-h">Поиск .input--search</h2>
+      <p class="t-body-m text-secondary">Поле с иконкой лупы слева. Рамка светлая, как у чипса. Иконка декоративная и не нажимается. Ошибки, загрузки и успеха у поиска нет.</p>
+      <div class="doc-group">
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item">
+            <span class="doc-caption">default / is-empty</span>
+            <div class="input input--search">
+              <label class="input__label visually-hidden" for="srch-default">Найти рецепт</label>
+              <div class="input__control">
+                <input class="input__field" id="srch-default" type="search" placeholder="Найти рецепт">
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">filled</span>
+            <div class="input input--search">
+              <label class="input__label visually-hidden" for="srch-filled">Найти рецепт</label>
+              <div class="input__control">
+                <input class="input__field" id="srch-filled" type="search" value="борщ" placeholder="Найти рецепт">
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">hover</span>
+            <div class="input input--search is-hover">
+              <label class="input__label visually-hidden" for="srch-hover">Найти рецепт</label>
+              <div class="input__control">
+                <input class="input__field" id="srch-hover" type="search" placeholder="Найти рецепт">
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">focus-visible</span>
+            <div class="input input--search is-focus-visible">
+              <label class="input__label visually-hidden" for="srch-focus">Найти рецепт</label>
+              <div class="input__control">
+                <input class="input__field" id="srch-focus" type="search" placeholder="Найти рецепт">
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">active</span>
+            <div class="input input--search is-active">
+              <label class="input__label visually-hidden" for="srch-active">Найти рецепт</label>
+              <div class="input__control">
+                <input class="input__field" id="srch-active" type="search" placeholder="Найти рецепт">
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="doc-item">
+            <span class="doc-caption">disabled</span>
+            <div class="input input--search">
+              <label class="input__label visually-hidden" for="srch-disabled">Найти рецепт</label>
+              <div class="input__control">
+                <input class="input__field" id="srch-disabled" type="search" placeholder="Найти рецепт" disabled>
+                <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3a. Выпадающий список -->
+    <section class="doc-section" id="dropdown" aria-labelledby="dropdown-h">
+      <h2 class="t-title-l" id="dropdown-h">Выпадающий список .dropdown</h2>
+      <p class="t-body-m text-secondary">Список значений под полем. Показан в раскрытом виде, само раскрытие требует скрипта.</p>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">под select</h3>
+        <div class="input input--select is-open">
+          <label class="input__label" for="dd-select">Типы блюд</label>
+          <div class="input__control">
+            <select class="input__field" id="dd-select" required><option>Горячее</option></select>
+            <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+          </div>
+          <div class="dropdown" role="listbox" aria-label="Типы блюд">
+            <div class="dropdown__list">
+              <button class="dropdown__option" type="button" role="option" aria-selected="false">Суп<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+              <button class="dropdown__option" type="button" role="option" aria-selected="true">Горячее<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+              <button class="dropdown__option" type="button" role="option" aria-selected="false">Салаты<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+              <button class="dropdown__option" type="button" role="option" aria-selected="false">Закуски<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+              <button class="dropdown__option" type="button" role="option" aria-selected="false">Десерты<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+              <button class="dropdown__option" type="button" role="option" aria-selected="false">Выпечка<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">с поиском и группами</h3>
+        <div class="dropdown" role="listbox" aria-label="Национальные кухни">
+          <div class="dropdown__search">
+            <svg class="icon dropdown__search-icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+            <input class="input__field" type="search" placeholder="Поиск..." aria-label="Поиск">
+          </div>
+          <div class="dropdown__list">
+            <p class="dropdown__group">Популярные</p>
+            <button class="dropdown__option" type="button" role="option" aria-selected="true">Русская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+            <button class="dropdown__option" type="button" role="option" aria-selected="false">Итальянская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+            <p class="dropdown__group">Все кухни</p>
+            <button class="dropdown__option" type="button" role="option" aria-selected="false">Грузинская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+            <button class="dropdown__option" type="button" role="option" aria-selected="false">Французская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+            <button class="dropdown__option" type="button" role="option" aria-selected="false">Японская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">строка списка: состояния</h3>
+        <div class="doc-frame">
+          <ul>
+            <li><span class="doc-caption">default</span><button class="dropdown__option" type="button" role="option" aria-selected="false">Русская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button></li>
+            <li><span class="doc-caption">hover</span><button class="dropdown__option is-hover" type="button" role="option" aria-selected="false">Русская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button></li>
+            <li><span class="doc-caption">focus-visible</span><button class="dropdown__option is-focus-visible" type="button" role="option" aria-selected="false">Русская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button></li>
+            <li><span class="doc-caption">active</span><button class="dropdown__option is-active" type="button" role="option" aria-selected="false">Русская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button></li>
+            <li><span class="doc-caption">selected</span><button class="dropdown__option" type="button" role="option" aria-selected="true">Русская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button></li>
+            <li><span class="doc-caption">disabled</span><button class="dropdown__option" type="button" role="option" aria-selected="false" disabled>Русская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">is-empty: ничего не найдено</h3>
+        <div class="dropdown" role="listbox" aria-label="Национальные кухни">
+          <div class="dropdown__search">
+            <svg class="icon dropdown__search-icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+            <input class="input__field" type="search" value="жжж" aria-label="Поиск">
+          </div>
+          <p class="dropdown__status">Ничего не найдено</p>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">is-loading</h3>
+        <div class="dropdown is-loading" role="listbox" aria-label="Национальные кухни" aria-busy="true">
+          <p class="dropdown__status"><span class="spinner" aria-hidden="true"></span>Загружаем список…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Чекбокс -->
+    <section class="doc-section" id="checkboxes" aria-labelledby="checkboxes-h">
+      <h2 class="t-title-l" id="checkboxes-h">Чекбокс .checkbox</h2>
+
+      <div class="doc-group">
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">default</span>
+            <label class="checkbox"><input class="checkbox__input" type="checkbox"><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Калорийность</span></label></div>
+          <div class="doc-item"><span class="doc-caption">hover</span>
+            <label class="checkbox is-hover"><input class="checkbox__input" type="checkbox"><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Калорийность</span></label></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span>
+            <label class="checkbox is-focus-visible"><input class="checkbox__input" type="checkbox"><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Калорийность</span></label></div>
+          <div class="doc-item"><span class="doc-caption">active</span>
+            <label class="checkbox is-active"><input class="checkbox__input" type="checkbox"><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Калорийность</span></label></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span>
+            <label class="checkbox"><input class="checkbox__input" type="checkbox" disabled><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Калорийность</span></label></div>
+          <div class="doc-item"><span class="doc-caption">is-error</span>
+            <label class="checkbox is-error"><input class="checkbox__input" type="checkbox" aria-invalid="true"><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Калорийность</span></label></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">checked</h3>
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">default</span>
+            <label class="checkbox"><input class="checkbox__input" type="checkbox" checked><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Калорийность</span></label></div>
+          <div class="doc-item"><span class="doc-caption">hover</span>
+            <label class="checkbox is-hover"><input class="checkbox__input" type="checkbox" checked><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Калорийность</span></label></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span>
+            <label class="checkbox is-focus-visible"><input class="checkbox__input" type="checkbox" checked><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Калорийность</span></label></div>
+          <div class="doc-item"><span class="doc-caption">active</span>
+            <label class="checkbox is-active"><input class="checkbox__input" type="checkbox" checked><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Калорийность</span></label></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span>
+            <label class="checkbox"><input class="checkbox__input" type="checkbox" checked disabled><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Калорийность</span></label></div>
+          <div class="doc-item"><span class="doc-caption">indeterminate</span>
+            <label class="checkbox is-indeterminate"><input class="checkbox__input" type="checkbox" aria-checked="mixed"><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Всё выбрано</span></label></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">группа с ошибкой</h3>
+        <fieldset class="fieldset">
+          <legend class="fieldset__legend">Дополнительно</legend>
+          <label class="checkbox is-error"><input class="checkbox__input" type="checkbox" aria-invalid="true" aria-describedby="cb-group-msg"><span class="checkbox__box"><svg class="icon icon--s icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><svg class="icon icon--s icon--minus" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></span><span class="checkbox__label">Указать калорийность</span></label>
+          <p class="message is-error" id="cb-group-msg" role="alert"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Отметьте пункт, чтобы продолжить</span></p>
+        </fieldset>
+      </div>
+    </section>
+
+    <!-- 5. Радио -->
+    <section class="doc-section" id="radios" aria-labelledby="radios-h">
+      <h2 class="t-title-l" id="radios-h">Радио .radio</h2>
+
+      <div class="doc-group">
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">default</span>
+            <label class="radio"><input class="radio__input" type="radio" name="r-default"><span class="radio__box"></span><span class="radio__label">Пошагово</span></label></div>
+          <div class="doc-item"><span class="doc-caption">hover</span>
+            <label class="radio is-hover"><input class="radio__input" type="radio" name="r-hover"><span class="radio__box"></span><span class="radio__label">Пошагово</span></label></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span>
+            <label class="radio is-focus-visible"><input class="radio__input" type="radio" name="r-focus"><span class="radio__box"></span><span class="radio__label">Пошагово</span></label></div>
+          <div class="doc-item"><span class="doc-caption">active</span>
+            <label class="radio is-active"><input class="radio__input" type="radio" name="r-active"><span class="radio__box"></span><span class="radio__label">Пошагово</span></label></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span>
+            <label class="radio"><input class="radio__input" type="radio" name="r-disabled" disabled><span class="radio__box"></span><span class="radio__label">Пошагово</span></label></div>
+          <div class="doc-item"><span class="doc-caption">is-error</span>
+            <label class="radio is-error"><input class="radio__input" type="radio" name="r-error" aria-invalid="true"><span class="radio__box"></span><span class="radio__label">Пошагово</span></label></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">checked</h3>
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">default</span>
+            <label class="radio"><input class="radio__input" type="radio" name="rc-default" checked><span class="radio__box"></span><span class="radio__label">Пошагово</span></label></div>
+          <div class="doc-item"><span class="doc-caption">hover</span>
+            <label class="radio is-hover"><input class="radio__input" type="radio" name="rc-hover" checked><span class="radio__box"></span><span class="radio__label">Пошагово</span></label></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span>
+            <label class="radio is-focus-visible"><input class="radio__input" type="radio" name="rc-focus" checked><span class="radio__box"></span><span class="radio__label">Пошагово</span></label></div>
+          <div class="doc-item"><span class="doc-caption">active</span>
+            <label class="radio is-active"><input class="radio__input" type="radio" name="rc-active" checked><span class="radio__box"></span><span class="radio__label">Пошагово</span></label></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span>
+            <label class="radio"><input class="radio__input" type="radio" name="rc-disabled" checked disabled><span class="radio__box"></span><span class="radio__label">Пошагово</span></label></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">группа с ошибкой</h3>
+        <fieldset class="fieldset">
+          <legend class="fieldset__legend">Как описать рецепт</legend>
+          <label class="radio is-error"><input class="radio__input" type="radio" name="r-group" aria-invalid="true" aria-describedby="r-group-msg"><span class="radio__box"></span><span class="radio__label">Пошагово с фото</span></label>
+          <label class="radio is-error"><input class="radio__input" type="radio" name="r-group" aria-invalid="true" aria-describedby="r-group-msg"><span class="radio__box"></span><span class="radio__label">Подробная инструкция</span></label>
+          <p class="message is-error" id="r-group-msg" role="alert"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Выберите способ описания</span></p>
+        </fieldset>
+      </div>
+    </section>
+
+    <!-- 6. Бейдж -->
+    <section class="doc-section" id="badges" aria-labelledby="badges-h">
+      <h2 class="t-title-l" id="badges-h">Бейдж .badge</h2>
+      <p class="t-body-m text-secondary">Статичный элемент, состояний взаимодействия нет.</p>
+      <div class="doc-group">
+        <div class="chip-group">
+          <span class="badge">Черновик</span>
+          <span class="badge badge--primary">Популярное</span>
+          <span class="badge badge--warning">На модерации</span>
+          <span class="badge badge--success">Опубликован</span>
+          <span class="badge badge--error">Отклонён</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Чипс -->
+    <section class="doc-section" id="chips" aria-labelledby="chips-h">
+      <h2 class="t-title-l" id="chips-h">Чипс .chip</h2>
+      <div class="doc-group">
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">default</span><div class="chip-group"><button class="chip" type="button" aria-pressed="false">Салаты</button></div></div>
+          <div class="doc-item"><span class="doc-caption">hover</span><div class="chip-group"><button class="chip is-hover" type="button" aria-pressed="false">Салаты</button></div></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span><div class="chip-group"><button class="chip is-focus-visible" type="button" aria-pressed="false">Салаты</button></div></div>
+          <div class="doc-item"><span class="doc-caption">active</span><div class="chip-group"><button class="chip is-active" type="button" aria-pressed="false">Салаты</button></div></div>
+          <div class="doc-item"><span class="doc-caption">selected</span><div class="chip-group"><button class="chip" type="button" aria-pressed="true">Салаты</button></div></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span><div class="chip-group"><button class="chip" type="button" aria-pressed="false" disabled>Салаты</button></div></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">категория блюда</h3>
+        <div class="chip-group" role="group" aria-label="Категория блюда">
+          <button class="chip" type="button" aria-pressed="false">Супы</button>
+          <button class="chip" type="button" aria-pressed="true">Горячее</button>
+          <button class="chip" type="button" aria-pressed="false">Салаты</button>
+          <button class="chip" type="button" aria-pressed="false">Закуски</button>
+          <button class="chip" type="button" aria-pressed="false">Десерты</button>
+          <button class="chip" type="button" aria-pressed="false">Выпечка</button>
+        </div>
+        <h3 class="t-title-m">подкатегория <span class="optional">(необязательно)</span></h3>
+        <div class="chip-group" role="group" aria-label="Подкатегория">
+          <button class="chip" type="button" aria-pressed="false">Птица</button>
+          <button class="chip" type="button" aria-pressed="true">Мясо</button>
+          <button class="chip" type="button" aria-pressed="false">Рыба</button>
+          <button class="chip" type="button" aria-pressed="false">Паста</button>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">чипс с крестиком</h3>
+        <p class="t-body-m text-secondary">Выбранное значение. Убирается кнопкой-крестиком.</p>
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">default</span><div class="chip-group"><span class="chip chip--tag">Птица<button class="chip__remove" type="button" aria-label="Убрать: Птица"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></span></div></div>
+          <div class="doc-item"><span class="doc-caption">hover</span><div class="chip-group"><span class="chip chip--tag">Птица<button class="chip__remove is-hover" type="button" aria-label="Убрать: Птица"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></span></div></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span><div class="chip-group"><span class="chip chip--tag">Птица<button class="chip__remove is-focus-visible" type="button" aria-label="Убрать: Птица"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></span></div></div>
+          <div class="doc-item"><span class="doc-caption">active</span><div class="chip-group"><span class="chip chip--tag">Птица<button class="chip__remove is-active" type="button" aria-label="Убрать: Птица"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></span></div></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span><div class="chip-group"><span class="chip chip--tag" aria-disabled="true">Птица<button class="chip__remove" type="button" aria-label="Убрать: Птица" disabled><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></span></div></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">чипс «ещё»</h3>
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-caption">default</span><div class="chip-group"><button class="chip chip--more" type="button"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>Ещё</button></div></div>
+          <div class="doc-item"><span class="doc-caption">hover</span><div class="chip-group"><button class="chip chip--more is-hover" type="button"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>Ещё</button></div></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span><div class="chip-group"><button class="chip chip--more is-focus-visible" type="button"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>Ещё</button></div></div>
+          <div class="doc-item"><span class="doc-caption">active</span><div class="chip-group"><button class="chip chip--more is-active" type="button"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>Ещё</button></div></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span><div class="chip-group"><button class="chip chip--more" type="button" disabled><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>Ещё</button></div></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">выбор нескольких значений</h3>
+        <div class="chip-group" role="group" aria-label="Национальные кухни">
+          <span class="chip chip--tag">Русская<button class="chip__remove" type="button" aria-label="Убрать: Русская"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></span>
+          <span class="chip chip--tag">Итальянская<button class="chip__remove" type="button" aria-label="Убрать: Итальянская"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></span>
+          <button class="chip chip--more" type="button"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>Ещё</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7b. Счётчик -->
+    <section class="doc-section" id="counter" aria-labelledby="counter-h">
+      <h2 class="t-title-l" id="counter-h">Счётчик .counter</h2>
+      <p class="t-body-m text-secondary">Количество порций. Кнопки — .btn--secondary с иконкой, значение — поле .input.</p>
+      <div class="doc-group">
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item"><span class="doc-caption">default</span>
+            <div class="input"><label class="input__label" for="cn-default">Количество порций</label>
+              <div class="input__control"><div class="counter"><button class="btn btn--secondary btn--icon" type="button" aria-label="Уменьшить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></button><input class="input__field" id="cn-default" type="text" inputmode="numeric" value="2"><button class="btn btn--secondary btn--icon" type="button" aria-label="Увеличить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button><span class="counter__suffix">порций</span></div></div></div></div>
+          <div class="doc-item"><span class="doc-caption">hover</span>
+            <div class="input"><label class="input__label" for="cn-hover">Количество порций</label>
+              <div class="input__control"><div class="counter"><button class="btn btn--secondary btn--icon" type="button" aria-label="Уменьшить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></button><input class="input__field" id="cn-hover" type="text" inputmode="numeric" value="2"><button class="btn btn--secondary btn--icon is-hover" type="button" aria-label="Увеличить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button><span class="counter__suffix">порций</span></div></div></div></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span>
+            <div class="input"><label class="input__label" for="cn-focus">Количество порций</label>
+              <div class="input__control"><div class="counter"><button class="btn btn--secondary btn--icon" type="button" aria-label="Уменьшить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></button><input class="input__field" id="cn-focus" type="text" inputmode="numeric" value="2"><button class="btn btn--secondary btn--icon is-focus-visible" type="button" aria-label="Увеличить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button><span class="counter__suffix">порций</span></div></div></div></div>
+          <div class="doc-item"><span class="doc-caption">active</span>
+            <div class="input"><label class="input__label" for="cn-active">Количество порций</label>
+              <div class="input__control"><div class="counter"><button class="btn btn--secondary btn--icon" type="button" aria-label="Уменьшить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></button><input class="input__field" id="cn-active" type="text" inputmode="numeric" value="2"><button class="btn btn--secondary btn--icon is-active" type="button" aria-label="Увеличить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button><span class="counter__suffix">порций</span></div></div></div></div>
+          <div class="doc-item"><span class="doc-caption">минимум: «−» недоступна</span>
+            <div class="input"><label class="input__label" for="cn-min">Количество порций</label>
+              <div class="input__control"><div class="counter"><button class="btn btn--secondary btn--icon" type="button" aria-label="Уменьшить" disabled><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></button><input class="input__field" id="cn-min" type="text" inputmode="numeric" value="1"><button class="btn btn--secondary btn--icon" type="button" aria-label="Увеличить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button><span class="counter__suffix">порция</span></div></div></div></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span>
+            <div class="input"><label class="input__label" for="cn-disabled">Количество порций</label>
+              <div class="input__control"><div class="counter"><button class="btn btn--secondary btn--icon" type="button" aria-label="Уменьшить" disabled><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></button><input class="input__field" id="cn-disabled" type="text" inputmode="numeric" value="2" disabled><button class="btn btn--secondary btn--icon" type="button" aria-label="Увеличить" disabled><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button><span class="counter__suffix">порций</span></div></div></div></div>
+          <div class="doc-item"><span class="doc-caption">is-empty</span>
+            <div class="input is-empty"><label class="input__label" for="cn-empty">Количество порций</label>
+              <div class="input__control"><div class="counter"><button class="btn btn--secondary btn--icon" type="button" aria-label="Уменьшить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></button><input class="input__field" id="cn-empty" type="text" inputmode="numeric" placeholder="1"><button class="btn btn--secondary btn--icon" type="button" aria-label="Увеличить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button><span class="counter__suffix">порций</span></div></div></div></div>
+          <div class="doc-item"><span class="doc-caption">is-error</span>
+            <div class="input is-error"><label class="input__label" for="cn-error">Количество порций</label>
+              <div class="input__control"><div class="counter"><button class="btn btn--secondary btn--icon" type="button" aria-label="Уменьшить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></button><input class="input__field" id="cn-error" type="text" inputmode="numeric" value="0" aria-invalid="true" aria-describedby="cn-error-msg"><button class="btn btn--secondary btn--icon" type="button" aria-label="Увеличить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button><span class="counter__suffix">порций</span></div></div>
+              <p class="message is-error" id="cn-error-msg" role="alert"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Укажите количество порций</span></p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Карточка рецепта -->
+    <section class="doc-section" id="cards" aria-labelledby="cards-h">
+      <h2 class="t-title-l" id="cards-h">Карточка .card</h2>
+      <p class="t-body-m text-secondary">Кликабельна целиком, без тени. Мета — иконка «часы» 16px + время приготовления. Градиент вместо обложки — временная подстановка, на экранах будет фото рецепта.</p>
+      <div class="doc-group">
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item"><span class="doc-caption">default</span>
+            <article><a class="card" href="#"><div class="card__media card__media--sample" role="img" aria-label="Борщ с говядиной"></div><div class="card__body"><span class="badge badge--success">Опубликован</span><h3 class="card__title">Борщ с говядиной</h3><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">hover</span>
+            <article><a class="card is-hover" href="#"><div class="card__media card__media--sample" role="img" aria-label="Борщ с говядиной"></div><div class="card__body"><span class="badge badge--success">Опубликован</span><h3 class="card__title">Борщ с говядиной</h3><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span>
+            <article><a class="card is-focus-visible" href="#"><div class="card__media card__media--sample" role="img" aria-label="Борщ с говядиной"></div><div class="card__body"><span class="badge badge--success">Опубликован</span><h3 class="card__title">Борщ с говядиной</h3><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">active</span>
+            <article><a class="card is-active" href="#"><div class="card__media card__media--sample" role="img" aria-label="Борщ с говядиной"></div><div class="card__body"><span class="badge badge--success">Опубликован</span><h3 class="card__title">Борщ с говядиной</h3><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span>
+            <article><a class="card" aria-disabled="true"><div class="card__media card__media--sample" role="img" aria-label="Борщ с говядиной"></div><div class="card__body"><span class="badge badge--success">Опубликован</span><h3 class="card__title">Борщ с говядиной</h3><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 мин</p></div></a></article></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">карточка-заглушка .card.is-empty</h3>
+        <p class="t-body-m text-secondary">Нет обложки: заливка surface-2, название и мета поверх.</p>
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item"><span class="doc-caption">is-empty</span>
+            <article><a class="card is-empty" href="#"><div class="card__body"><span class="badge card__badge">Черновик</span><h3 class="card__title">Пирог с яблоками</h3><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>1 час</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">is-empty · hover</span>
+            <article><a class="card is-empty is-hover" href="#"><div class="card__body"><span class="badge card__badge">Черновик</span><h3 class="card__title">Пирог с яблоками</h3><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>1 час</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">is-empty · focus-visible</span>
+            <article><a class="card is-empty is-focus-visible" href="#"><div class="card__body"><span class="badge card__badge">Черновик</span><h3 class="card__title">Пирог с яблоками</h3><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>1 час</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">is-empty · active</span>
+            <article><a class="card is-empty is-active" href="#"><div class="card__body"><span class="badge card__badge">Черновик</span><h3 class="card__title">Пирог с яблоками</h3><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>1 час</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">is-empty · disabled</span>
+            <article><a class="card is-empty" aria-disabled="true"><div class="card__body"><span class="badge card__badge">Черновик</span><h3 class="card__title">Пирог с яблоками</h3><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>1 час</p></div></a></article></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8a. Карточка горизонтальная -->
+    <section class="doc-section" id="card-horizontal" aria-labelledby="card-horizontal-h">
+      <h2 class="t-title-l" id="card-horizontal-h">Карточка горизонтальная .card--horizontal</h2>
+      <p class="t-body-m text-secondary">Модификатор .card: картинка слева (128px), текст справа. Описание — фиксированная высота в 2 строки, длинное обрезается многоточием; мета (иконка «глаз» + время чтения) прижата к низу. Кликабельна целиком.</p>
+      <div class="doc-group">
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item"><span class="doc-caption">default</span>
+            <article><a class="card card--horizontal" href="#"><div class="card__media card__media--sample" role="img" aria-label="Слойки с сосисками"></div><div class="card__body"><h3 class="card__title">Гости уже у двери</h3><p class="card__text">Подборка вкусных рецептов на скорую руку. Гости удивятся.</p><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg>5 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">default · длинное описание (обрезка на 2 строках)</span>
+            <article><a class="card card--horizontal" href="#"><div class="card__media card__media--sample" role="img" aria-label="Восточные сладости"></div><div class="card__body"><h3 class="card__title">Восточные сладости</h3><p class="card__text">А знали ли вы, что рахат-лукум не просто вкусный десерт, но ещё и отличное дополнение к чаю? Разбираемся, из чего его делают и как подавать.</p><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg>7 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">hover</span>
+            <article><a class="card card--horizontal is-hover" href="#"><div class="card__media card__media--sample" role="img" aria-label="Слойки с сосисками"></div><div class="card__body"><h3 class="card__title">Гости уже у двери</h3><p class="card__text">Подборка вкусных рецептов на скорую руку. Гости удивятся.</p><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg>5 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span>
+            <article><a class="card card--horizontal is-focus-visible" href="#"><div class="card__media card__media--sample" role="img" aria-label="Слойки с сосисками"></div><div class="card__body"><h3 class="card__title">Гости уже у двери</h3><p class="card__text">Подборка вкусных рецептов на скорую руку. Гости удивятся.</p><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg>5 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">active</span>
+            <article><a class="card card--horizontal is-active" href="#"><div class="card__media card__media--sample" role="img" aria-label="Слойки с сосисками"></div><div class="card__body"><h3 class="card__title">Гости уже у двери</h3><p class="card__text">Подборка вкусных рецептов на скорую руку. Гости удивятся.</p><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg>5 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span>
+            <article><a class="card card--horizontal" aria-disabled="true"><div class="card__media card__media--sample" role="img" aria-label="Слойки с сосисками"></div><div class="card__body"><h3 class="card__title">Гости уже у двери</h3><p class="card__text">Подборка вкусных рецептов на скорую руку. Гости удивятся.</p><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg>5 мин</p></div></a></article></div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">без обложки .card--horizontal.is-empty</h3>
+        <p class="t-body-m text-secondary">Колонки с картинкой нет: заливка surface-2 на всю карточку.</p>
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item"><span class="doc-caption">is-empty</span>
+            <article><a class="card card--horizontal is-empty" href="#"><div class="card__body"><h3 class="card__title">Гости уже у двери</h3><p class="card__text">Подборка вкусных рецептов на скорую руку. Гости удивятся.</p><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg>5 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">is-empty · hover</span>
+            <article><a class="card card--horizontal is-empty is-hover" href="#"><div class="card__body"><h3 class="card__title">Гости уже у двери</h3><p class="card__text">Подборка вкусных рецептов на скорую руку. Гости удивятся.</p><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg>5 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">is-empty · focus-visible</span>
+            <article><a class="card card--horizontal is-empty is-focus-visible" href="#"><div class="card__body"><h3 class="card__title">Гости уже у двери</h3><p class="card__text">Подборка вкусных рецептов на скорую руку. Гости удивятся.</p><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg>5 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">is-empty · active</span>
+            <article><a class="card card--horizontal is-empty is-active" href="#"><div class="card__body"><h3 class="card__title">Гости уже у двери</h3><p class="card__text">Подборка вкусных рецептов на скорую руку. Гости удивятся.</p><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg>5 мин</p></div></a></article></div>
+          <div class="doc-item"><span class="doc-caption">is-empty · disabled</span>
+            <article><a class="card card--horizontal is-empty" aria-disabled="true"><div class="card__body"><h3 class="card__title">Гости уже у двери</h3><p class="card__text">Подборка вкусных рецептов на скорую руку. Гости удивятся.</p><p class="card__meta"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg>5 мин</p></div></a></article></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Степпер -->
+    <section class="doc-section" id="stepper" aria-labelledby="stepper-h">
+      <h2 class="t-title-l" id="stepper-h">Степпер .stepper</h2>
+      <p class="t-body-m text-secondary">Не интерактивный. Пройденные и текущий шаги одного цвета (is-success и is-current), будущие — без класса.</p>
+      <div class="doc-group">
+        <div class="doc-grid doc-grid--1">
+          <div class="stepper" role="group" aria-label="Шаг 1 из 4">
+            <ol class="stepper__track"><li class="stepper__segment is-current" aria-current="step"></li><li class="stepper__segment"></li><li class="stepper__segment"></li><li class="stepper__segment"></li></ol>
+            <p class="stepper__label">Шаг 1 из 4</p>
+          </div>
+          <div class="stepper" role="group" aria-label="Шаг 2 из 4">
+            <ol class="stepper__track"><li class="stepper__segment is-success"></li><li class="stepper__segment is-current" aria-current="step"></li><li class="stepper__segment"></li><li class="stepper__segment"></li></ol>
+            <p class="stepper__label">Шаг 2 из 4</p>
+          </div>
+          <div class="stepper" role="group" aria-label="Шаг 3 из 4">
+            <ol class="stepper__track"><li class="stepper__segment is-success"></li><li class="stepper__segment is-success"></li><li class="stepper__segment is-current" aria-current="step"></li><li class="stepper__segment"></li></ol>
+            <p class="stepper__label">Шаг 3 из 4</p>
+          </div>
+          <div class="stepper" role="group" aria-label="Шаг 4 из 4">
+            <ol class="stepper__track"><li class="stepper__segment is-success"></li><li class="stepper__segment is-success"></li><li class="stepper__segment is-success"></li><li class="stepper__segment is-current" aria-current="step"></li></ol>
+            <p class="stepper__label">Шаг 4 из 4</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Зона загрузки обложки -->
+    <section class="doc-section" id="upload" aria-labelledby="upload-h">
+      <h2 class="t-title-l" id="upload-h">Зона загрузки обложки .upload</h2>
+      <p class="t-body-m text-secondary">Состояние is-empty совпадает с default: файл не выбран.</p>
+      <div class="doc-group">
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item"><span class="doc-caption">default / is-empty</span>
+            <div class="upload"><input class="upload__input" id="up-default" type="file" accept="image/*"><label class="upload__frame" for="up-default"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Обложка рецепта</span><span class="upload__hint">Выберите фото из галереи или сделайте снимок</span></label></div></div>
+          <div class="doc-item"><span class="doc-caption">hover</span>
+            <div class="upload is-hover"><input class="upload__input" id="up-hover" type="file" accept="image/*"><label class="upload__frame" for="up-hover"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Обложка рецепта</span><span class="upload__hint">Выберите фото из галереи или сделайте снимок</span></label></div></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span>
+            <div class="upload is-focus-visible"><input class="upload__input" id="up-focus" type="file" accept="image/*"><label class="upload__frame" for="up-focus"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Обложка рецепта</span><span class="upload__hint">Выберите фото из галереи или сделайте снимок</span></label></div></div>
+          <div class="doc-item"><span class="doc-caption">active</span>
+            <div class="upload is-active"><input class="upload__input" id="up-active" type="file" accept="image/*"><label class="upload__frame" for="up-active"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Обложка рецепта</span><span class="upload__hint">Выберите фото из галереи или сделайте снимок</span></label></div></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span>
+            <div class="upload"><input class="upload__input" id="up-disabled" type="file" accept="image/*" disabled><label class="upload__frame" for="up-disabled"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Обложка рецепта</span><span class="upload__hint">Выберите фото из галереи или сделайте снимок</span></label></div></div>
+          <div class="doc-item"><span class="doc-caption">is-error</span>
+            <div class="upload is-error"><input class="upload__input" id="up-error" type="file" accept="image/*" aria-invalid="true" aria-describedby="up-error-msg"><label class="upload__frame" for="up-error"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Обложка рецепта</span><span class="upload__hint">Выберите фото из галереи или сделайте снимок</span></label>
+              <p class="message is-error" id="up-error-msg" role="alert"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Не удалось загрузить фото. Попробуйте ещё раз</span></p></div></div>
+          <div class="doc-item"><span class="doc-caption">is-loading</span>
+            <div class="upload is-loading"><input class="upload__input" id="up-loading" type="file" accept="image/*" aria-busy="true"><label class="upload__frame" for="up-loading"><span class="spinner" aria-hidden="true"></span><span class="upload__title">Загружаем фото…</span></label></div></div>
+          <div class="doc-item"><span class="doc-caption">is-success</span>
+            <div class="upload is-success"><div class="upload__preview"><div class="card__media card__media--sample" role="img" aria-label="Загруженная обложка"></div>
+              <div class="upload__actions"><button class="btn btn--secondary btn--icon" type="button" aria-label="Заменить фото"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg></button><button class="btn btn--secondary btn--icon" type="button" aria-label="Удалить фото"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button></div></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Шторка -->
+    <section class="doc-section" id="sheet" aria-labelledby="sheet-h">
+      <h2 class="t-title-l" id="sheet-h">Шторка «+» .sheet</h2>
+      <p class="t-body-m text-secondary">Выезжает снизу поверх экрана над скримом, закрывается по нажатию на скрим или Escape. Показана в открытом состоянии (.overlay.is-open).</p>
+      <div class="doc-group">
+        <div class="doc-frame doc-frame--sheet"><div class="overlay is-open">
+            <div class="sheet" role="dialog" aria-modal="true" aria-label="Что добавить">
+              <span class="sheet__handle" aria-hidden="true"></span>
+              <ul>
+                <li><button class="sheet__item" type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-recipe-add"/></svg>Добавить рецепт</button></li>
+                <li><button class="sheet__item" type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-edit-3"/></svg>Написать статью</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3 class="t-title-m">строка шторки: состояния</h3>
+        <div class="doc-frame">
+          <ul>
+            <li><span class="doc-caption">default</span><button class="sheet__item" type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-recipe-add"/></svg>Добавить рецепт</button></li>
+            <li><span class="doc-caption">hover</span><button class="sheet__item is-hover" type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-recipe-add"/></svg>Добавить рецепт</button></li>
+            <li><span class="doc-caption">focus-visible</span><button class="sheet__item is-focus-visible" type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-recipe-add"/></svg>Добавить рецепт</button></li>
+            <li><span class="doc-caption">active</span><button class="sheet__item is-active" type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-recipe-add"/></svg>Добавить рецепт</button></li>
+            <li><span class="doc-caption">disabled</span><button class="sheet__item" type="button" disabled><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-recipe-add"/></svg>Добавить рецепт</button></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Таб-бар -->
+    <section class="doc-section" id="tabbar" aria-labelledby="tabbar-h">
+      <h2 class="t-title-l" id="tabbar-h">Нижний таб-бар .tabbar</h2>
+      <div class="doc-group">
+        <div class="doc-item"><span class="doc-caption">default, текущий раздел — Главная</span>
+          <div class="doc-frame doc-frame--bleed">
+            <nav class="tabbar" aria-label="Основная навигация, пример 1">
+              <a class="tabbar__item" href="#" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-home"/></svg>Главная</a>
+              <a class="tabbar__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg>Подборки</a>
+              <a class="tabbar__item tabbar__item--add" href="#" aria-label="Добавить"><span class="tabbar__add"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></span></a>
+              <a class="tabbar__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bookmark"/></svg>Избранное</a>
+              <a class="tabbar__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-user"/></svg>Профиль</a>
+            </nav>
+          </div>
+        </div>
+        <div class="doc-item"><span class="doc-caption">Подборки: hover · Добавить: active · Избранное: focus-visible · Профиль: disabled</span>
+          <div class="doc-frame doc-frame--bleed">
+            <nav class="tabbar" aria-label="Основная навигация, пример 2">
+              <a class="tabbar__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-home"/></svg>Главная</a>
+              <a class="tabbar__item is-hover" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg>Подборки</a>
+              <a class="tabbar__item tabbar__item--add is-active" href="#" aria-label="Добавить"><span class="tabbar__add"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></span></a>
+              <a class="tabbar__item is-focus-visible" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bookmark"/></svg>Избранное</a>
+              <a class="tabbar__item" aria-disabled="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-user"/></svg>Профиль</a>
+            </nav>
+          </div>
+        </div>
+        <div class="doc-item"><span class="doc-caption">Добавить: hover</span>
+          <div class="doc-frame doc-frame--bleed">
+            <nav class="tabbar" aria-label="Основная навигация, пример 3">
+              <a class="tabbar__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-home"/></svg>Главная</a>
+              <a class="tabbar__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg>Подборки</a>
+              <a class="tabbar__item tabbar__item--add is-hover" href="#" aria-label="Добавить"><span class="tabbar__add"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></span></a>
+              <a class="tabbar__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bookmark"/></svg>Избранное</a>
+              <a class="tabbar__item" href="#"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-user"/></svg>Профиль</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. Строка ингредиента -->
+    <section class="doc-section" id="ingredient" aria-labelledby="ingredient-h">
+      <h2 class="t-title-l" id="ingredient-h">Строка ингредиента .ingredient</h2>
+      <p class="t-body-m text-secondary">Добавленный ингредиент: ручка перетаскивания, название, количество с единицей, удаление. Поля ввода — компоненты .input, .counter и .input--select.</p>
+      <div class="doc-group">
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item"><span class="doc-caption">default</span>
+            <div class="ingredient">
+              <span class="ingredient__handle" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-grip"/></svg></span>
+              <span class="ingredient__name">Картошка</span>
+              <span class="ingredient__qty">3 шт</span>
+              <button class="btn btn--ghost btn--icon" type="button" aria-label="Удалить ингредиент: Картошка"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button>
+            </div></div>
+
+          <div class="doc-item"><span class="doc-caption">длинное название</span>
+            <div class="ingredient">
+              <span class="ingredient__handle" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-grip"/></svg></span>
+              <span class="ingredient__name">Филе куриной грудки без кожи охлаждённое</span>
+              <span class="ingredient__qty">500 г</span>
+              <button class="btn btn--ghost btn--icon" type="button" aria-label="Удалить ингредиент: Филе куриной грудки"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button>
+            </div></div>
+
+          <div class="doc-item"><span class="doc-caption">hover (удаление)</span>
+            <div class="ingredient">
+              <span class="ingredient__handle" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-grip"/></svg></span>
+              <span class="ingredient__name">Грибы</span>
+              <span class="ingredient__qty">200 г</span>
+              <button class="btn btn--ghost btn--icon is-hover" type="button" aria-label="Удалить ингредиент: Грибы"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button>
+            </div></div>
+
+          <div class="doc-item"><span class="doc-caption">focus-visible (удаление)</span>
+            <div class="ingredient">
+              <span class="ingredient__handle" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-grip"/></svg></span>
+              <span class="ingredient__name">Грибы</span>
+              <span class="ingredient__qty">200 г</span>
+              <button class="btn btn--ghost btn--icon is-focus-visible" type="button" aria-label="Удалить ингредиент: Грибы"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button>
+            </div></div>
+
+          <div class="doc-item"><span class="doc-caption">is-dragging</span>
+            <div class="ingredient is-dragging">
+              <span class="ingredient__handle" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-grip"/></svg></span>
+              <span class="ingredient__name">Лук</span>
+              <span class="ingredient__qty">2,5 ст. л.</span>
+              <button class="btn btn--ghost btn--icon" type="button" aria-label="Удалить ингредиент: Лук"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button>
+            </div></div>
+        </div>
+      </div>
+
+      <h3 class="t-title-m">Пустой список .ingredient-empty</h3>
+      <div class="doc-group">
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item"><span class="doc-caption">is-empty (default)</span>
+            <div class="ingredient-empty">
+              <p class="ingredient-empty__title">Список ингредиентов пуст</p>
+              <p class="ingredient-empty__hint">Добавьте хотя бы 1 ингредиент</p>
+            </div></div>
+
+          <div class="doc-item"><span class="doc-caption">is-error</span>
+            <div class="ingredient-empty is-error">
+              <p class="ingredient-empty__title">Список ингредиентов пуст</p>
+              <p class="ingredient-empty__hint">Добавьте хотя бы 1 ингредиент</p>
+            </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13a. Карточка шага -->
+    <section class="doc-section" id="recipe-step" aria-labelledby="recipe-step-h">
+      <h2 class="t-title-l" id="recipe-step-h">Карточка шага .recipe-step</h2>
+      <p class="t-body-m text-secondary">Шаг приготовления: ручка перетаскивания, номер, удаление, описание (.input) и необязательное фото (.upload--compact). Пустой список шагов — .ingredient-empty.</p>
+      <div class="doc-group">
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item"><span class="doc-caption">default</span>
+            <div class="recipe-step"><div class="recipe-step__bar"><span class="recipe-step__handle" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-grip"/></svg></span><h3 class="recipe-step__title">Шаг 1</h3><button class="btn btn--ghost btn--icon" type="button" aria-label="Удалить шаг 1"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button></div><div class="input"><label class="input__label" for="rs1">Описание шага</label><div class="input__control"><textarea class="input__field input__field--textarea" id="rs1" rows="3" placeholder="Например: Нарежьте картофель кубиками">Нарежьте картофель кубиками и обжарьте до золотистой корочки.</textarea></div></div><div class="upload upload--compact"><input class="upload__input" id="rs1-p" type="file" accept="image/*"><label class="upload__frame" for="rs1-p"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Добавить фото</span></label></div></div></div>
+          <div class="doc-item"><span class="doc-caption">is-empty</span>
+            <div class="recipe-step"><div class="recipe-step__bar"><span class="recipe-step__handle" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-grip"/></svg></span><h3 class="recipe-step__title">Шаг 2</h3><button class="btn btn--ghost btn--icon" type="button" aria-label="Удалить шаг 2"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button></div><div class="input"><label class="input__label" for="rs2">Описание шага</label><div class="input__control"><textarea class="input__field input__field--textarea" id="rs2" rows="3" placeholder="Например: Нарежьте картофель кубиками"></textarea></div></div><div class="upload upload--compact"><input class="upload__input" id="rs2-p" type="file" accept="image/*"><label class="upload__frame" for="rs2-p"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Добавить фото</span></label></div></div></div>
+          <div class="doc-item"><span class="doc-caption">is-error</span>
+            <div class="recipe-step is-error"><div class="recipe-step__bar"><span class="recipe-step__handle" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-grip"/></svg></span><h3 class="recipe-step__title">Шаг 3</h3><button class="btn btn--ghost btn--icon" type="button" aria-label="Удалить шаг 3"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button></div><div class="input is-error"><label class="input__label" for="rs3">Описание шага</label><div class="input__control"><textarea class="input__field input__field--textarea" id="rs3" rows="3" placeholder="Например: Нарежьте картофель кубиками" aria-invalid="true" aria-describedby="rs3-msg"></textarea></div><p class="message is-error" id="rs3-msg" role="alert"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Опишите шаг</span></p></div><div class="upload upload--compact"><input class="upload__input" id="rs3-p" type="file" accept="image/*"><label class="upload__frame" for="rs3-p"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Добавить фото</span></label></div></div></div>
+          <div class="doc-item"><span class="doc-caption">is-dragging</span>
+            <div class="recipe-step is-dragging"><div class="recipe-step__bar"><span class="recipe-step__handle" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-grip"/></svg></span><h3 class="recipe-step__title">Шаг 4</h3><button class="btn btn--ghost btn--icon" type="button" aria-label="Удалить шаг 4"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button></div><div class="input"><label class="input__label" for="rs4">Описание шага</label><div class="input__control"><textarea class="input__field input__field--textarea" id="rs4" rows="3" placeholder="Например: Нарежьте картофель кубиками">Посолите, добавьте специи и тушите под крышкой 15 минут.</textarea></div></div><div class="upload upload--compact"><input class="upload__input" id="rs4-p" type="file" accept="image/*"><label class="upload__frame" for="rs4-p"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Добавить фото</span></label></div></div></div>
+          <div class="doc-item"><span class="doc-caption">пустой список шагов</span>
+            <div class="ingredient-empty"><p class="ingredient-empty__title">Шагов пока нет</p><p class="ingredient-empty__hint">Добавьте хотя бы 1 шаг</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. Компактная зона загрузки -->
+    <section class="doc-section" id="upload-compact" aria-labelledby="upload-compact-h">
+      <h2 class="t-title-l" id="upload-compact-h">Компактная зона загрузки .upload--compact</h2>
+      <p class="t-body-m text-secondary">Вариант .upload для фото шага: строка вместо крупной зоны. Состояния и поведение те же.</p>
+      <div class="doc-group">
+        <div class="doc-grid doc-grid--1">
+          <div class="doc-item"><span class="doc-caption">default / is-empty</span>
+            <div class="upload upload--compact"><input class="upload__input" id="uc-default" type="file" accept="image/*"><label class="upload__frame" for="uc-default"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Добавить фото</span></label></div></div>
+          <div class="doc-item"><span class="doc-caption">hover</span>
+            <div class="upload upload--compact is-hover"><input class="upload__input" id="uc-hover" type="file" accept="image/*"><label class="upload__frame" for="uc-hover"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Добавить фото</span></label></div></div>
+          <div class="doc-item"><span class="doc-caption">focus-visible</span>
+            <div class="upload upload--compact is-focus-visible"><input class="upload__input" id="uc-focus" type="file" accept="image/*"><label class="upload__frame" for="uc-focus"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Добавить фото</span></label></div></div>
+          <div class="doc-item"><span class="doc-caption">active</span>
+            <div class="upload upload--compact is-active"><input class="upload__input" id="uc-active" type="file" accept="image/*"><label class="upload__frame" for="uc-active"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Добавить фото</span></label></div></div>
+          <div class="doc-item"><span class="doc-caption">disabled</span>
+            <div class="upload upload--compact"><input class="upload__input" id="uc-disabled" type="file" accept="image/*" disabled><label class="upload__frame" for="uc-disabled"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Добавить фото</span></label></div></div>
+          <div class="doc-item"><span class="doc-caption">is-error</span>
+            <div class="upload upload--compact is-error"><input class="upload__input" id="uc-error" type="file" accept="image/*" aria-invalid="true" aria-describedby="uc-error-msg"><label class="upload__frame" for="uc-error"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Добавить фото</span></label><p class="message is-error" id="uc-error-msg" role="alert"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Не удалось загрузить фото. Попробуйте ещё раз</span></p></div></div>
+          <div class="doc-item"><span class="doc-caption">is-loading</span>
+            <div class="upload upload--compact is-loading"><input class="upload__input" id="uc-loading" type="file" accept="image/*" aria-busy="true"><div class="upload__frame" role="status"><span class="spinner" aria-hidden="true"></span><span class="upload__title">Загружаем фото…</span></div></div></div>
+          <div class="doc-item"><span class="doc-caption">is-success</span>
+            <div class="upload upload--compact is-success"><div class="upload__preview"><div class="card__media card__media--sample" role="img" aria-label="Загруженное фото шага"></div><div class="upload__actions"><button class="btn btn--secondary btn--icon" type="button" aria-label="Заменить фото"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg></button><button class="btn btn--secondary btn--icon" type="button" aria-label="Удалить фото"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button></div></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. Окно выбора -->
+    <section class="doc-section" id="picker" aria-labelledby="picker-h">
+      <h2 class="t-title-l" id="picker-h">Окно выбора .picker</h2>
+      <p class="t-body-m text-secondary">Полноэкранный список с поиском для длинных справочников (например, национальные кухни). Открывается поверх формы (.is-open), закрывается по «Готово», стрелке назад или Escape. Показано открытым. Внутри — компоненты .input--search, .chip--tag и .dropdown__option.</p>
+      <div class="doc-group">
+        <div class="doc-item"><span class="doc-caption">is-open: выбрано несколько</span>
+          <div class="doc-frame doc-frame--picker">
+            <div class="picker is-open" role="dialog" aria-modal="true" aria-labelledby="picker-demo-title">
+              <div class="picker__bar">
+                <button class="btn btn--ghost btn--icon" type="button" aria-label="Назад"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></button>
+                <h3 class="picker__title" id="picker-demo-title">Национальная кухня</h3>
+                <button class="btn btn--ghost" type="button">Готово</button>
+              </div>
+              <div class="picker__search">
+                <div class="input input--search">
+                  <label class="input__label visually-hidden" for="picker-demo-search">Поиск</label>
+                  <div class="input__control"><input class="input__field" id="picker-demo-search" type="search" placeholder="Поиск..."><svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg></div>
+                </div>
+              </div>
+              <div class="picker__selected"><span class="chip chip--tag">Грузинская<button class="chip__remove" type="button" aria-label="Убрать: Грузинская"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></span><span class="chip chip--tag">Японская<button class="chip__remove" type="button" aria-label="Убрать: Японская"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></span></div>
+              <div class="picker__list" role="listbox" aria-multiselectable="true" aria-label="Национальная кухня">
+                <p class="dropdown__group">Популярные</p>
+                <button class="dropdown__option" type="button" role="option" aria-selected="false">Русская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button><button class="dropdown__option" type="button" role="option" aria-selected="false">Итальянская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button><button class="dropdown__option" type="button" role="option" aria-selected="false">Азиатская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+                <p class="dropdown__group">Остальные</p>
+                <button class="dropdown__option" type="button" role="option" aria-selected="false">Армянская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button><button class="dropdown__option" type="button" role="option" aria-selected="true">Грузинская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button><button class="dropdown__option" type="button" role="option" aria-selected="false">Греческая<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button><button class="dropdown__option" type="button" role="option" aria-selected="true">Японская<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="doc-item"><span class="doc-caption">ничего не найдено</span>
+          <div class="doc-frame doc-frame--picker">
+            <div class="picker is-open" role="dialog" aria-modal="true" aria-labelledby="picker-demo2-title">
+              <div class="picker__bar">
+                <button class="btn btn--ghost btn--icon" type="button" aria-label="Назад"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></button>
+                <h3 class="picker__title" id="picker-demo2-title">Национальная кухня</h3>
+                <button class="btn btn--ghost" type="button">Готово</button>
+              </div>
+              <div class="picker__search">
+                <div class="input input--search">
+                  <label class="input__label visually-hidden" for="picker-demo2-search">Поиск</label>
+                  <div class="input__control"><input class="input__field" id="picker-demo2-search" type="search" value="Марс"><svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg></div>
+                </div>
+              </div>
+              <div class="picker__list"><p class="dropdown__status">Ничего не найдено</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13a. Диалог -->
+    <section class="doc-section" id="dialog" aria-labelledby="dialog-h">
+      <h2 class="t-title-l" id="dialog-h">Диалог .dialog</h2>
+      <p class="t-body-m text-secondary">Окно по центру на затемнении (.overlay.overlay--center). Закрывается кнопкой «Продолжить заполнение», нажатием на затемнение или Escape. Показан в открытом состоянии.</p>
+      <div class="doc-group">
+        <div class="doc-frame doc-frame--sheet"><div class="overlay overlay--center is-open">
+            <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-demo-title" aria-describedby="dialog-demo-text">
+              <h3 class="dialog__title" id="dialog-demo-title">Сохранить как черновик?</h3>
+              <p class="dialog__text" id="dialog-demo-text">Вы выходите из формы добавления рецепта. Черновик можно будет продолжить позже.</p>
+              <div class="dialog__actions">
+                <button class="btn btn--primary btn--block" type="button">Сохранить в черновик</button>
+                <button class="btn btn--secondary btn--block" type="button">Не сохранять</button>
+                <button class="btn btn--ghost btn--block" type="button">Продолжить заполнение</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+</body>
+</html>

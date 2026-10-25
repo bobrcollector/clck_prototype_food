@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Добавление рецепта — шаг 4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="draft.js" defer></script>
+  <script src="step-4.js" defer></script>
+  <script src="close-dialog.js" defer></script>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M12 5L5 12L12 19" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12H19" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="screen" id="screen">
+
+  <header class="formhead">
+    <div class="formbar">
+      <a class="btn btn--ghost btn--icon formbar__back" href="screen-4.html" aria-label="Назад"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></a>
+      <h1 class="formbar__title t-title-l">Добавление рецепта</h1>
+      <a class="btn btn--ghost btn--icon formbar__close" href="screen-1.html" aria-label="Закрыть"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></a>
+    </div>
+    <div class="stepper" role="group" aria-label="Шаг 4 из 4">
+      <ol class="stepper__track"><li class="stepper__segment is-success"></li><li class="stepper__segment is-success"></li><li class="stepper__segment is-success"></li><li class="stepper__segment is-current" aria-current="step"></li></ol>
+      <p class="stepper__label">Шаг 4 из 4. Классификация · необязательно</p>
+    </div>
+  </header>
+
+  <main class="screen__main">
+    <form class="form" id="recipe-form" action="screen-6.html" novalidate>
+
+      <div class="input">
+        <label class="input__label" for="servings">Количество порций</label>
+        <div class="input__control"><div class="counter"><button class="btn btn--secondary btn--icon" id="servings-dec" type="button" aria-label="Уменьшить" disabled><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg></button><input class="input__field" id="servings" name="servings" type="text" inputmode="numeric" value="1" autocomplete="off"><button class="btn btn--secondary btn--icon" id="servings-inc" type="button" aria-label="Увеличить"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button><span class="counter__suffix" id="servings-suffix">порция</span></div></div>
+      </div>
+
+      <div class="fieldset" role="group" aria-labelledby="total-label">
+        <p class="input__label" id="total-label">Общее время на кухне</p>
+        <div class="chip-group" id="total-chips" data-chips="single"><button class="chip" type="button" aria-pressed="false">15 мин</button><button class="chip" type="button" aria-pressed="false">30 мин</button><button class="chip" type="button" aria-pressed="false">1 час</button><button class="chip" type="button" aria-pressed="false">1,5 часа</button><button class="chip" type="button" aria-pressed="false" data-custom="total-custom">Свой вариант</button></div>
+        <div class="form__pair form__pair--time" id="total-custom" hidden>
+          <div class="input">
+            <label class="input__label visually-hidden" for="total-value">Общее время, значение</label>
+            <div class="input__control"><input class="input__field" id="total-value" name="total-value" type="text" inputmode="numeric" placeholder="Введите время" autocomplete="off"></div>
+          </div>
+          <div class="input input--select">
+            <label class="input__label visually-hidden" for="total-unit">Общее время, единица</label>
+            <div class="input__control">
+              <select class="input__field" id="total-unit" name="total-unit"><option>мин</option><option>ч</option></select>
+              <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fieldset" role="group" aria-labelledby="cooking-label">
+        <p class="input__label" id="cooking-label">Тип приготовления</p>
+        <div class="chip-group" id="cooking-chips" data-chips="multi"><button class="chip" type="button" aria-pressed="false">Варка</button><button class="chip" type="button" aria-pressed="false">Жарка</button><button class="chip" type="button" aria-pressed="false">Запекание</button><button class="chip" type="button" aria-pressed="false">Тушение</button><button class="chip" type="button" aria-pressed="false">На пару</button><button class="chip" type="button" aria-pressed="false">Гриль</button><button class="chip" type="button" aria-pressed="false">Без готовки</button></div>
+      </div>
+
+      <div class="fieldset" role="group" aria-labelledby="cuisine-label">
+        <p class="input__label" id="cuisine-label">Национальная кухня</p>
+        <div class="chip-group" id="cuisine-chips"><button class="chip" type="button" aria-pressed="false">Русская</button><button class="chip" type="button" aria-pressed="false">Итальянская</button><button class="chip" type="button" aria-pressed="false">Азиатская</button><button class="chip" type="button" aria-pressed="false">Кавказская</button><button class="chip" type="button" aria-pressed="false">Европейская</button><button class="chip chip--more" id="cuisine-more" type="button" aria-haspopup="dialog" aria-controls="picker"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>Показать все</button></div>
+      </div>
+
+      <div>
+        <button class="chip chip--more" id="more-toggle" type="button" aria-expanded="false" aria-controls="more-fields"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>Дополнительные параметры</button>
+      </div>
+
+      <div class="form__more" id="more-fields" hidden>
+      <div class="fieldset" role="group" aria-labelledby="active-label">
+        <p class="input__label" id="active-label">Активное время на кухне</p>
+        <div class="chip-group" id="active-chips" data-chips="single"><button class="chip" type="button" aria-pressed="false">15 мин</button><button class="chip" type="button" aria-pressed="false">30 мин</button><button class="chip" type="button" aria-pressed="false">1 час</button><button class="chip" type="button" aria-pressed="false">1,5 часа</button><button class="chip" type="button" aria-pressed="false" data-custom="active-custom">Свой вариант</button></div>
+        <div class="form__pair form__pair--time" id="active-custom" hidden>
+          <div class="input">
+            <label class="input__label visually-hidden" for="active-value">Активное время, значение</label>
+            <div class="input__control"><input class="input__field" id="active-value" name="active-value" type="text" inputmode="numeric" placeholder="Введите время" autocomplete="off"></div>
+          </div>
+          <div class="input input--select">
+            <label class="input__label visually-hidden" for="active-unit">Активное время, единица</label>
+            <div class="input__control">
+              <select class="input__field" id="active-unit" name="active-unit"><option>мин</option><option>ч</option></select>
+              <svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input">
+        <label class="input__label" for="calories">Калорийность, ккал</label>
+        <div class="input__control"><input class="input__field" id="calories" name="calories" type="text" inputmode="numeric" placeholder="Например: 320" autocomplete="off"></div>
+      </div>
+
+      <div class="fieldset" role="group" aria-labelledby="features-label">
+        <p class="input__label" id="features-label">Особенности блюда</p>
+        <div class="chip-group" id="features-chips"><button class="chip" type="button" aria-pressed="false">Вегетарианское</button><button class="chip" type="button" aria-pressed="false">Постное</button><button class="chip" type="button" aria-pressed="false">Без глютена</button><button class="chip chip--more" id="features-more" type="button" aria-haspopup="dialog" aria-controls="picker"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>Показать все</button></div>
+      </div>
+
+      <div class="fieldset" role="group" aria-labelledby="occasion-label">
+        <p class="input__label" id="occasion-label">Повод</p>
+        <div class="chip-group" id="occasion-chips"><button class="chip" type="button" aria-pressed="false">На каждый день</button><button class="chip" type="button" aria-pressed="false">Праздничный стол</button><button class="chip" type="button" aria-pressed="false">Новый год</button><button class="chip chip--more" id="occasion-more" type="button" aria-haspopup="dialog" aria-controls="picker"><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>Показать все</button></div>
+      </div>
+      </div>
+
+    </form>
+  </main>
+
+  <div class="form__footer">
+    <button class="btn btn--primary btn--block" type="submit" form="recipe-form">Сохранить рецепт</button>
+  </div>
+
+</div>
+
+<div class="picker" id="picker" role="dialog" aria-modal="true" aria-labelledby="picker-title">
+  <div class="picker__bar">
+    <button class="btn btn--ghost btn--icon" id="picker-back" type="button" aria-label="Назад"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></button>
+    <h2 class="picker__title" id="picker-title">Национальная кухня</h2>
+    <button class="btn btn--ghost" id="picker-done" type="button">Готово</button>
+  </div>
+  <div class="picker__search">
+    <div class="input input--search">
+      <label class="input__label visually-hidden" for="picker-search">Поиск</label>
+      <div class="input__control"><input class="input__field" id="picker-search" type="search" placeholder="Поиск..." autocomplete="off"><svg class="icon input__icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg></div>
+    </div>
+  </div>
+  <div class="picker__selected" id="picker-selected" hidden></div>
+  <div class="picker__list" id="picker-list" role="listbox" aria-multiselectable="true" aria-label="Список"></div>
+</div>
+
+<div class="overlay overlay--center" id="exit-dialog">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="exit-title" aria-describedby="exit-text">
+    <h2 class="dialog__title" id="exit-title">Сохранить как черновик?</h2>
+    <p class="dialog__text" id="exit-text">Вы выходите из формы добавления рецепта. Черновик можно будет продолжить позже.</p>
+    <div class="dialog__actions">
+      <a class="btn btn--primary btn--block" href="screen-1.html">Сохранить в черновик</a>
+      <a class="btn btn--secondary btn--block" id="exit-discard" href="screen-1.html">Не сохранять</a>
+      <button class="btn btn--ghost btn--block" id="exit-cancel" type="button">Продолжить заполнение</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

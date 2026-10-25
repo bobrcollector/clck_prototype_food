@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Добавление рецепта — шаг 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="draft.js" defer></script>
+  <script src="step-1.js" defer></script>
+  <script src="close-dialog.js" defer></script>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 17C14.2091 17 16 15.2091 16 13C16 10.7909 14.2091 9 12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6H5M5 6H21M5 6V20C5 20.5304 5.21071 21.0391 5.58579 21.4142C5.96086 21.7893 6.46957 22 7 22H17C17.5304 22 18.0391 21.7893 18.4142 21.4142C18.7893 21.0391 19 20.5304 19 20V6M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8V12M12 16H12.01" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="1.67" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="screen" id="screen">
+
+  <header class="formhead">
+    <div class="formbar">
+      <h1 class="formbar__title t-title-l">Добавление рецепта</h1>
+      <a class="btn btn--ghost btn--icon formbar__close" href="screen-1.html" aria-label="Закрыть"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></a>
+    </div>
+    <div class="stepper" role="group" aria-label="Шаг 1 из 4">
+      <ol class="stepper__track"><li class="stepper__segment is-current" aria-current="step"></li><li class="stepper__segment"></li><li class="stepper__segment"></li><li class="stepper__segment"></li></ol>
+      <p class="stepper__label">Шаг 1 из 4. Основная информация</p>
+    </div>
+  </header>
+
+  <main class="screen__main">
+    <form class="form" id="recipe-form" action="screen-3.html" novalidate>
+
+      <div class="upload" id="cover-upload">
+        <input class="upload__input" id="cover-input" name="cover" type="file" accept="image/*" aria-describedby="cover-error">
+        <label class="upload__frame" id="cover-frame" for="cover-input"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg><span class="upload__title">Обложка рецепта</span><span class="upload__hint">Выберите фото из галереи или сделайте снимок</span></label>
+        <div class="upload__frame" id="cover-loading" role="status" hidden><span class="spinner" aria-hidden="true"></span><span class="upload__title">Загружаем фото…</span></div>
+        <div class="upload__preview" id="cover-preview" hidden>
+          <img class="card__media" id="cover-image" alt="Обложка рецепта">
+          <div class="upload__actions">
+            <button class="btn btn--secondary btn--icon" id="cover-replace" type="button" aria-label="Заменить фото"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg></button>
+            <button class="btn btn--secondary btn--icon" id="cover-remove" type="button" aria-label="Удалить фото"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg></button>
+          </div>
+        </div>
+        <p class="message is-error" id="cover-error" role="alert" hidden><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Не удалось загрузить фото. Попробуйте ещё раз</span></p>
+      </div>
+
+      <div class="input" id="name-field">
+        <label class="input__label" for="dish-name">Название блюда</label>
+        <div class="input__control"><input class="input__field" id="dish-name" name="name" type="text" placeholder="Например: Сосиски в тесте" aria-describedby="name-error" required></div>
+        <p class="message is-error" id="name-error" role="alert" hidden><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Введите название рецепта</span></p>
+      </div>
+
+      <div class="input" id="desc-field">
+        <label class="input__label" for="dish-desc">Описание блюда</label>
+        <div class="input__control"><textarea class="input__field input__field--textarea" id="dish-desc" name="description" rows="4" placeholder="Например: Хрустящая выпечка из слоёного теста. Готовится за 20 минут" aria-describedby="desc-error" required></textarea></div>
+        <p class="message is-error" id="desc-error" role="alert" hidden><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Добавьте краткое описание</span></p>
+      </div>
+
+      <div class="fieldset" id="type-field" role="group" aria-labelledby="type-label">
+        <p class="input__label" id="type-label">Тип блюда</p>
+        <div class="chip-group" id="type-chips"></div>
+        <p class="message is-error" id="type-error" role="alert" hidden><svg class="icon icon--s" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Выберите тип блюда</span></p>
+      </div>
+
+      <div class="fieldset field-popover" id="category-field" role="group" aria-labelledby="category-label" hidden>
+        <p class="input__label" id="category-label">Категория блюда <span class="optional">(необязательно)</span></p>
+        <div class="chip-group" id="category-chips"></div>
+      </div>
+
+    </form>
+  </main>
+
+  <div class="form__footer">
+    <button class="btn btn--primary btn--block" type="submit" form="recipe-form">Дальше</button>
+  </div>
+
+</div>
+
+<div class="overlay overlay--center" id="exit-dialog">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="exit-title" aria-describedby="exit-text">
+    <h2 class="dialog__title" id="exit-title">Сохранить как черновик?</h2>
+    <p class="dialog__text" id="exit-text">Вы выходите из формы добавления рецепта. Черновик можно будет продолжить позже.</p>
+    <div class="dialog__actions">
+      <a class="btn btn--primary btn--block" href="screen-1.html">Сохранить в черновик</a>
+      <a class="btn btn--secondary btn--block" id="exit-discard" href="screen-1.html">Не сохранять</a>
+      <button class="btn btn--ghost btn--block" id="exit-cancel" type="button">Продолжить заполнение</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
