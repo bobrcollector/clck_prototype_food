@@ -1,6 +1,2 @@
-# RussFood — флоу «Добавление рецепта»
-
-- `index.html` — редизайн: 6 экранов (`screen-1.html` … `screen-6.html`) и компоненты (`components.html`)
-- `old/` — старый кликабельный прототип (`old/index.html`)
-
-Для GitHub Pages: Settings → Pages → Deploy from a branch → `main` / `(root)`.
+https://bobrcollector.github.io/clck_prototype_food/screen-1.html - финальный прототип
+file:///C:/Users/Kate/VSCode/russfood-prototypes/russfood-prototypes/old/index.html - промежуточный прототип
